@@ -219,6 +219,14 @@
   .diag__tx{font-size:13.5px;color:var(--ink);line-height:1.5;margin:0;}
 
   /* laudo robusto */
+  .modo-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:4px 0 0;padding:13px 0;border-bottom:1px solid var(--line);}
+  .modo-lbl{font-size:13px;font-weight:700;color:var(--muted);}
+  .modo-seg{display:inline-flex;background:var(--mist);border:1px solid var(--line-strong);border-radius:10px;padding:3px;gap:3px;}
+  .modo-btn{font:inherit;font-size:13px;font-weight:600;color:var(--muted);background:none;border:none;cursor:pointer;padding:7px 15px;border-radius:8px;transition:.12s;}
+  .modo-btn:hover{color:var(--petrol-700);}
+  .modo-btn.is-on{background:var(--petrol);color:#fff;}
+  .modo-hint{font-size:12px;color:var(--muted-2);}
+  #ind-report.modo-avaliado .gestor-only{display:none !important;}
   .laudo__sec{margin-top:26px;break-inside:avoid;}
   .laudo__h{font-family:"Fraunces",serif;font-weight:600;font-size:18px;color:var(--ink);margin:0 0 6px;display:flex;align-items:center;gap:10px;}
   .laudo__h::before{content:"";width:5px;height:19px;border-radius:3px;background:var(--accent);flex:none;}
@@ -252,7 +260,7 @@
     @page{ margin:1.2cm; }
     *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
     html,body{ background:#fff !important; }
-    .topbar,.note,.nav,.picker,footer{display:none !important;}
+    .topbar,.note,.nav,.picker,.modo-bar,footer{display:none !important;}
     .wrap{padding:0;max-width:100%;}
     .disc__profile,.disc__chart,.gauge,.qcell{box-shadow:none;break-inside:avoid;}
     .block{break-inside:avoid;}
@@ -547,23 +555,23 @@ function diagnosticoHTML(c, nome){
     <p class="block__sub">Análise integrada do perfil de ${esc(primeiro)} — base para devolutiva e desenvolvimento.</p>`;
 
   // 1. Perfil comportamental detalhado
-  h += `<div class="laudo__sec"><h4 class="laudo__h">1. Perfil comportamental</h4>
+  h += `<div class="laudo__sec"><h4 class="laudo__h">Perfil comportamental</h4>
     <p class="laudo__p">${esc(DISC_DETAL[prim].desc)}</p>
     <p class="laudo__p">O traço predominante é <b>${prim} — ${DISC_NOME[prim]}</b>, tendo <b>${sec} — ${DISC_NOME[sec]}</b> como estilo secundário, que ${SEC_INFLU[sec]}. A distribuição das escolhas no instrumento foi <b>${discDist}</b>, indicando o peso relativo de cada dimensão no comportamento natural.</p>
     <p class="laudo__p"><b>Como tende a agir:</b> ${esc(DISC_DETAL[prim].ctx)}</p></div>`;
 
   // 2. Pontos fortes
-  h += `<div class="laudo__sec"><h4 class="laudo__h">2. Pontos fortes</h4><div class="fa forte">`;
+  h += `<div class="laudo__sec"><h4 class="laudo__h">Pontos fortes</h4><div class="fa forte">`;
   pFortes.forEach(p=> h += `<div class="fa__item"><span class="fa__ic">+</span><div class="fa__tx">${esc(p.t)}<small>${esc(p.s)}</small></div></div>`);
   h += `</div></div>`;
 
   // 3. Pontos de atenção
-  h += `<div class="laudo__sec"><h4 class="laudo__h">3. Pontos de atenção</h4><div class="fa aten">`;
+  h += `<div class="laudo__sec"><h4 class="laudo__h">Pontos de atenção</h4><div class="fa aten">`;
   pAten.forEach(p=> h += `<div class="fa__item"><span class="fa__ic">!</span><div class="fa__tx">${esc(p.t)}<small>${esc(p.s)}</small></div></div>`);
   h += `</div></div>`;
 
   // 4. Análise por competência
-  h += `<div class="laudo__sec"><h4 class="laudo__h">4. Análise por competência</h4><div class="diag__grid">`;
+  h += `<div class="laudo__sec"><h4 class="laudo__h">Análise por competência</h4><div class="diag__grid">`;
   let cultTxt = `${COMP_TXT.s1[bandKey(cultura.band.label)]} Como as afirmações foram construídas sobre os próprios valores da My Blue, o índice de <b>${cultura.pct}%</b> reflete o quanto ${esc(primeiro)} pensa e age em sintonia com a empresa.`;
   if(fortesC.length) cultTxt += ` Destaque em <b>${fortesC.map(x=>x.nome).join("</b>, <b>")}</b>.`;
   if(fracosNarr.length) cultTxt += ` Mais espaço de evolução em <b>${fracosNarr.map(x=>x.nome).join("</b>, <b>")}</b>.`;
@@ -574,19 +582,19 @@ function diagnosticoHTML(c, nome){
   h += `</div></div>`;
 
   // 5. Adequação à cultura e ao cargo
-  h += `<div class="laudo__sec"><h4 class="laudo__h">5. Adequação à cultura e ao cargo</h4>
+  h += `<div class="laudo__sec"><h4 class="laudo__h">Adequação à cultura e ao cargo</h4>
     <p class="laudo__p">No eixo cultural, a aderência geral é <b>${cultura.pct}% (${cultura.band.label.toLowerCase()})</b>${fracosPDI.length?`, com os valores <b>${fracosPDI.map(x=>x.nome).join("</b> e <b>")}</b> como frentes prioritárias de aproximação`:""}.</p>
     <p class="laudo__p">Considerando o contexto comercial e de relacionamento da função, o perfil <b>${prim} — ${DISC_NOME[prim]}</b> ${ROLEFIT[prim]}. As competências comerciais (<b>${com.pct}%</b>, ${com.band.label.toLowerCase()}) ${com.pct>=70?"sustentam bem":"ainda pedem reforço para"} a atuação na função, e a inteligência emocional (<b>${eq.pct}%</b>) ${eq.pct>=70?"favorece":"é fator a desenvolver na"} gestão da relação com o cliente.</p></div>`;
 
   // 6. Parecer / aderência
-  h += `<div class="laudo__sec"><h4 class="laudo__h">6. Parecer e índice de aderência</h4>
+  h += `<div class="laudo__sec gestor-only"><h4 class="laudo__h">Parecer e índice de aderência</h4>
     <div class="verdito" style="border-color:${v.cor}">
       <div class="verdito__l"><div class="verdito__lbl">Índice de aderência</div><div class="verdito__num" style="color:${v.cor}">${aderencia}%</div></div>
       <div class="verdito__r"><div class="verdito__t" style="color:${v.cor}">${v.t}</div><div class="verdito__d">${v.d}</div></div>
     </div></div>`;
 
   // 7. PDI
-  h += `<div class="laudo__sec"><h4 class="laudo__h">7. Plano de Desenvolvimento Individual</h4><div class="pdi">`;
+  h += `<div class="laudo__sec"><h4 class="laudo__h">Plano de Desenvolvimento Individual</h4><div class="pdi">`;
   if(fortes.length){
     h += `<div class="pdi__sec"><div class="pdi__st">Forças a potencializar</div><ul class="pdi__ul forte">`;
     fortes.forEach(a=> h += `<li><b>${esc(a.nome)} (${a.pct}%)</b> — ${esc(FORCA_ACAO[a.k]||"alavancar esse ponto forte em desafios à altura.")}</li>`);
@@ -608,7 +616,7 @@ function diagnosticoHTML(c, nome){
   h += `</div></div>`;
 
   // 8. Recomendações para a devolutiva
-  h += `<div class="laudo__sec"><h4 class="laudo__h">8. Recomendações para a devolutiva</h4>
+  h += `<div class="laudo__sec gestor-only"><h4 class="laudo__h">Recomendações para a devolutiva</h4>
     <p class="laudo__p">Sugere-se conduzir uma conversa de devolutiva começando pelo reconhecimento dos pontos fortes, validando-os com exemplos concretos do dia a dia. Em seguida, apresentar os pontos de atenção como oportunidades de evolução — não como falhas — pactuando 2 a 3 ações prioritárias do plano acima com prazos definidos.</p>
     <p class="laudo__p">Os índices refletem a autopercepção do avaliado; recomenda-se confrontá-los com a percepção da liderança e com indicadores reais de desempenho para calibrar o plano. Um novo ciclo de avaliação em 6 meses permite medir a evolução de forma objetiva.</p></div>`;
 
@@ -715,7 +723,17 @@ function renderIndividual(d){
     <span><b>Como ler.</b> Este diagnóstico parte da autopercepção do avaliado e serve como apoio à decisão — não como veredito. Ele deve ser validado e aprofundado em uma conversa de devolutiva antes de qualquer encaminhamento sobre a pessoa.</span>
   </div>`;
 
-  document.getElementById("ind-report").innerHTML = h;
+  document.getElementById("ind-report").innerHTML = `
+    <div class="modo-bar">
+      <span class="modo-lbl">Versão do laudo:</span>
+      <div class="modo-seg">
+        <button class="modo-btn is-on" data-modo="gestor">Gestor</button>
+        <button class="modo-btn" data-modo="avaliado">Avaliado</button>
+      </div>
+      <span class="modo-hint" id="modoHint">Documento interno — inclui parecer de aderência e recomendações.</span>
+    </div>` + h;
+  const rep = document.getElementById("ind-report");
+  rep.classList.remove("modo-avaliado");
   document.getElementById("print").style.display = "inline-flex";
 }
 
@@ -860,6 +878,19 @@ function trocarAba(view){
 }
 document.querySelectorAll(".tab").forEach(t=> t.addEventListener("click",()=>trocarAba(t.dataset.view)));
 document.getElementById("print").addEventListener("click",()=>window.print());
+
+/* alternância Gestor / Avaliado no laudo individual */
+document.addEventListener("click",e=>{
+  const b = e.target.closest(".modo-btn"); if(!b) return;
+  const modo = b.dataset.modo;
+  const rep = document.getElementById("ind-report");
+  rep.classList.toggle("modo-avaliado", modo==="avaliado");
+  rep.querySelectorAll(".modo-btn").forEach(x=>x.classList.toggle("is-on", x.dataset.modo===modo));
+  const hint = document.getElementById("modoHint");
+  if(hint) hint.textContent = modo==="avaliado"
+    ? "Versão para entregar ao avaliado — sem parecer de aderência e recomendações internas."
+    : "Documento interno — inclui parecer de aderência e recomendações.";
+});
 
 /* ====================== CARREGAR DADOS ====================== */
 let PESSOAS = [];
