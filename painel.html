@@ -217,6 +217,18 @@
   .diag__ct span:first-child{font-size:14px;font-weight:700;color:var(--petrol-700);}
   .diag__pct{font-family:"Fraunces",serif;font-weight:700;font-size:18px;font-variant-numeric:tabular-nums;}
   .diag__tx{font-size:13.5px;color:var(--ink);line-height:1.5;margin:0;}
+
+  /* laudo robusto */
+  .laudo__sec{margin-top:26px;break-inside:avoid;}
+  .laudo__h{font-family:"Fraunces",serif;font-weight:600;font-size:18px;color:var(--ink);margin:0 0 6px;display:flex;align-items:center;gap:10px;}
+  .laudo__h::before{content:"";width:5px;height:19px;border-radius:3px;background:var(--accent);flex:none;}
+  .laudo__p{font-size:14px;line-height:1.65;color:var(--ink);margin:9px 0;}
+  .laudo__p b{color:var(--petrol-700);font-weight:600;}
+  .fa{display:grid;gap:8px;margin-top:10px;}
+  .fa__item{display:flex;gap:11px;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:11px 14px;break-inside:avoid;}
+  .fa__ic{flex:none;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;margin-top:1px;}
+  .fa.forte .fa__ic{background:var(--s);} .fa.aten .fa__ic{background:var(--accent);}
+  .fa__tx{font-size:13.5px;line-height:1.45;color:var(--ink);} .fa__tx small{display:block;color:var(--muted-2);font-size:11.5px;margin-top:2px;font-weight:600;letter-spacing:.02em;}
   .diag__tx b{color:var(--petrol-700);font-weight:600;}
 
   .pdi{background:var(--petrol-900);border-radius:var(--radius);padding:6px 22px 22px;color:#EAF1F1;box-shadow:var(--shadow-lg);}
@@ -448,75 +460,138 @@ function fitVerdito(p){
   return {t:"Aderência a aprofundar", d:"Os indicadores sugerem distância entre o perfil atual e o esperado. Recomendação: conversa de devolutiva aprofundada para avaliar fit, expectativas e plano intensivo antes de qualquer encaminhamento.", cor:"#C0492F"};
 }
 
+/* ============ BIBLIOTECAS DO LAUDO (texto rico) ============ */
+const DISC_DETAL = {
+  D:{desc:"Pessoas com predominância em Dominância são movidas por resultado, desafio e controle sobre o ambiente. Tendem a agir com rapidez e decisão, assumindo a frente em situações que exigem iniciativa. Comunicam-se de forma direta e objetiva e costumam prosperar sob pressão, em cenários de competição ou de metas agressivas.",
+     ctx:"Sob pressão, tende a acelerar o ritmo e a centralizar decisões. Nas relações, valoriza franqueza e eficiência, podendo parecer impaciente com rodeios. Ao decidir, prioriza velocidade e resultado, por vezes em detrimento da consulta ao grupo.",
+     fortes:["Forte orientação a resultado e senso de urgência","Coragem para tomar decisões difíceis e assumir riscos","Iniciativa e autonomia, sem depender de comando externo","Capacidade de liderar e manter o foco sob pressão"],
+     atencao:["Pode priorizar a tarefa e atropelar relacionamentos","Tendência a decidir sem ouvir o suficiente o time","Impaciência com processos, detalhes e ritmos diferentes do seu","Dificuldade em delegar e confiar no tempo do outro"]},
+  I:{desc:"O perfil de Influência é movido por pessoas, reconhecimento e conexão. Caracteriza-se pela comunicação envolvente, pelo otimismo e pela facilidade de criar relações e engajar os outros em torno de uma ideia. Destaca-se em ambientes que valorizam interação, persuasão e energia.",
+     ctx:"Sob pressão, busca apoio e mantém o ânimo, mas pode dispersar o foco. Nas relações, é caloroso e expressivo. Ao decidir, deixa-se guiar pelo entusiasmo e pela leitura emocional do contexto, mais do que pelo dado frio.",
+     fortes:["Comunicação persuasiva e construção rápida de rapport","Capacidade de engajar, motivar e mobilizar pessoas","Otimismo e energia que contagiam o ambiente","Abertura a novas ideias e criatividade na abordagem"],
+     atencao:["Disciplina de acompanhamento e atenção a detalhes","Pode priorizar a relação em detrimento do dado e do prazo","Dispersão diante de muitas frentes ao mesmo tempo","Dificuldade com tarefas repetitivas, solitárias ou muito técnicas"]},
+  S:{desc:"A predominância em Estabilidade reflete uma pessoa orientada à constância, à cooperação e à construção de relações de confiança. Age com paciência, escuta e previsibilidade, mantendo a calma mesmo em ambientes tensos. Costuma ser o alicerce de equipes, valorizando harmonia e compromissos de longo prazo.",
+     ctx:"Sob pressão, mantém a serenidade, mas pode resistir a mudanças bruscas. Nas relações, é leal, atencioso e bom ouvinte. Ao decidir, pondera o impacto sobre as pessoas e prefere o consenso ao confronto direto.",
+     fortes:["Constância e confiabilidade na entrega","Excelente escuta e capacidade de construir confiança","Calma e equilíbrio em situações de tensão","Forte em fidelização, pós-venda e trabalho em equipe"],
+     atencao:["Pode demorar a se adaptar a mudanças rápidas","Tende a evitar o conflito mesmo quando ele é necessário","Dificuldade em assumir posições mais incisivas e diretas","Risco de sobrecarga por dificuldade em dizer não"]},
+  C:{desc:"O perfil de Conformidade é orientado à qualidade, à precisão e à análise. Caracteriza-se pelo rigor, pela busca de informação e pela estruturação cuidadosa antes de agir. Destaca-se em contextos que exigem técnica, organização e padrões elevados de entrega.",
+     ctx:"Sob pressão, tende a buscar mais dados e pode retardar a decisão. Nas relações, é reservado e criterioso, ganhando confiança aos poucos. Ao decidir, baseia-se em fatos e análise, evitando o improviso.",
+     fortes:["Análise apurada e decisão fundamentada em dados","Precisão, organização e padrões elevados de qualidade","Argumentação técnica e diagnóstico consistente","Confiabilidade e cuidado com a qualidade da entrega"],
+     atencao:["Velocidade de decisão quando faltam informações completas","Pode travar diante de imprevistos ou ambiguidade","Tendência a perfeccionismo e excesso de autocrítica","Pode se isolar na tarefa e comunicar pouco o processo"]},
+};
+const SEC_INFLU = {
+  D:"reforça a assertividade e o foco em resultado, agregando energia para a ação",
+  I:"adiciona comunicação e capacidade de engajar pessoas ao estilo principal",
+  S:"traz constância, paciência e cuidado com as relações ao estilo principal",
+  C:"agrega análise, critério e atenção à qualidade ao estilo principal",
+};
+const ROLEFIT = {
+  D:"tende a performar bem em vendas de ciclo curto e metas agressivas, com foco em fechamento — exigindo atenção ao relacionamento de longo prazo",
+  I:"favorece a prospecção, a abertura de relacionamento e a persuasão — pedindo atenção à disciplina de acompanhamento e ao registro",
+  S:"favorece a fidelização, o pós-venda e a confiança de longo prazo com o cliente — pedindo atenção à abordagem ativa e ao momento de fechar",
+  C:"favorece a venda técnica e consultiva, com argumentação baseada em dados — pedindo atenção à agilidade e ao calor humano na relação",
+};
+const COMP_TXT = {
+  s1:{exc:"O alinhamento cultural é excepcional. A pessoa demonstra forte identificação com os valores e a missão da empresa, agindo de forma coerente com o que se espera culturalmente. É forte candidata a multiplicadora da cultura, servindo de referência para os colegas.",
+      forte:"O alinhamento cultural é forte. A pessoa compreende e pratica os valores da empresa na maior parte das situações, com boa coerência entre discurso e atitude.",
+      cons:"O alinhamento cultural é consistente. Há identificação com os valores, com espaço para aprofundar a vivência prática de alguns deles no dia a dia.",
+      dev:"O alinhamento cultural está em desenvolvimento. Existem pontos de distância entre o comportamento atual e os valores esperados, que merecem atenção e acompanhamento próximo."},
+  s3:{exc:"A inteligência emocional é excepcional. Percebe e regula bem as próprias emoções e lê com sensibilidade o estado dos outros, usando isso a favor das relações e dos resultados.",
+      forte:"A inteligência emocional é forte. Há boa autoconsciência e autocontrole, com capacidade de manter o equilíbrio na maioria das situações de tensão.",
+      cons:"A inteligência emocional é consistente. A base está presente, com oportunidade de desenvolver a regulação sob pressão e a leitura dos sinais emocionais dos colegas.",
+      dev:"A inteligência emocional está em desenvolvimento. A pessoa pode se beneficiar de práticas de autoconsciência, regulação e escuta ativa para ampliar seu repertório emocional."},
+  s4:{exc:"As competências comerciais são excepcionais. Há domínio sólido das etapas de venda, da prospecção ao fechamento, com forte capacidade de relacionamento e geração de resultado.",
+      forte:"As competências comerciais são fortes. Boa atuação no ciclo de vendas, com consistência em prospecção, negociação e relacionamento com a carteira.",
+      cons:"As competências comerciais são consistentes. Há base comercial, com espaço para fortalecer etapas específicas como diagnóstico, manejo de objeções ou acompanhamento ativo.",
+      dev:"As competências comerciais estão em desenvolvimento. Recomenda-se trabalhar a rotina comercial completa, da prospecção ao fechamento, com apoio e treinamento estruturado."},
+  s5:{exc:"O potencial de liderança é excepcional. Exerce influência natural, tem visão de conjunto e disposição genuína para desenvolver os outros — forte candidata a posições de maior responsabilidade.",
+      forte:"O potencial de liderança é forte. Demonstra influência e visão além das próprias tarefas, com boa base para assumir frentes de coordenação.",
+      cons:"O potencial de liderança é consistente. Há indícios de influência e responsabilidade, com espaço para desenvolver feedback, delegação e visão estratégica.",
+      dev:"O potencial de liderança está em desenvolvimento. O foco atual tende a ser a própria entrega; com estímulo e oportunidades, pode evoluir para papéis de maior influência."},
+};
+const COMP_FORTE = {s1:"Alta identificação com os valores e a cultura da empresa",s3:"Boa gestão emocional e leitura das relações",s4:"Sólido domínio das competências comerciais",s5:"Potencial natural para influência e liderança"};
+const COMP_ATEN  = {s1:"Espaço para aprofundar a vivência prática dos valores",s3:"Oportunidade de fortalecer autoconsciência e regulação emocional",s4:"Necessidade de estruturar melhor a rotina comercial",s5:"Liderança a desenvolver — foco atual concentrado na própria entrega"};
+function bandKey(l){return l==="Excepcional"?"exc":l==="Forte"?"forte":l==="Consistente"?"cons":"dev";}
+
+/* ============ LAUDO (2–3 páginas, determinístico) ============ */
 function diagnosticoHTML(c, nome){
   const prim = c.ranked[0], sec = c.ranked[1];
   const primeiro = (nome||"O avaliado").split(" ")[0];
   const cultura = c.compBy.s1, eq = c.compBy.s3, com = c.compBy.s4, lid = c.compBy.s5;
-  const aderencia = Math.round((cultura.pct*0.6) + (eq.pct*0.4)); // cultura pesa mais
+  const aderencia = Math.round((cultura.pct*0.6) + (eq.pct*0.4));
   const v = fitVerdito(aderencia);
+  const discDist = ["D","I","S","C"].map(k=>`${k} ${c.discPct[k]}%`).join(" · ");
 
-  // clusters culturais ordenados
   const clOrd = [...c.clusters].sort((a,b)=>b.pct-a.pct);
-  const fortesC = clOrd.filter(x=>x.pct>=70).slice(0,2);                       // claramente fortes
-  const fracosNarr = [...c.clusters].sort((a,b)=>a.pct-b.pct).filter(x=>x.pct<60).slice(0,3); // claramente fracos
-  const fracosPDI = [...c.clusters].sort((a,b)=>a.pct-b.pct).slice(0,2);       // sempre os 2 menores p/ ação
+  const fortesC = clOrd.filter(x=>x.pct>=70).slice(0,3);
+  const fracosNarr = [...c.clusters].sort((a,b)=>a.pct-b.pct).filter(x=>x.pct<60).slice(0,3);
+  const fracosPDI = [...c.clusters].sort((a,b)=>a.pct-b.pct).slice(0,2);
 
-  // prioridades de desenvolvimento (competências mais baixas)
   const areas = [{...cultura,k:"s1"},{...eq,k:"s3"},{...com,k:"s4"},{...lid,k:"s5"}];
   const prioridades = areas.filter(a=>a.pct<70).sort((a,b)=>a.pct-b.pct);
   const fortes = areas.filter(a=>a.pct>=70).sort((a,b)=>b.pct-a.pct);
 
-  // texto do diagnóstico DISC
-  const discDist = ["D","I","S","C"].map(k=>`${k} ${c.discPct[k]}%`).join(" · ");
+  // montar pontos fortes / atenção
+  const pFortes = [];
+  DISC_DETAL[prim].fortes.slice(0,3).forEach(t=>pFortes.push({t, s:`Perfil ${prim} — ${DISC_NOME[prim]}`}));
+  fortes.forEach(a=>pFortes.push({t:COMP_FORTE[a.k], s:`${a.nome} · ${a.pct}%`}));
+  fortesC.forEach(x=>pFortes.push({t:`Forte vivência do valor "${x.nome}"`, s:`Cultura · ${x.pct}%`}));
 
-  let h = `<div class="block diag">
-    <div class="block__title"><h3>Diagnóstico &amp; Plano de Desenvolvimento</h3><span class="tag">síntese consultiva</span></div>
-    <p class="block__sub">Leitura integrada do perfil de ${esc(primeiro)}, com indicação de aderência e ações práticas de evolução.</p>`;
+  const pAten = [];
+  DISC_DETAL[prim].atencao.slice(0,3).forEach(t=>pAten.push({t, s:`Ponto cego do perfil ${prim}`}));
+  areas.filter(a=>a.pct<55).sort((a,b)=>a.pct-b.pct).forEach(a=>pAten.push({t:COMP_ATEN[a.k], s:`${a.nome} · ${a.pct}%`}));
+  fracosNarr.forEach(x=>pAten.push({t:`Vivência ainda discreta do valor "${x.nome}"`, s:`Cultura · ${x.pct}%`}));
 
-  // Aderência
-  h += `<div class="verdito" style="border-color:${v.cor}">
-    <div class="verdito__l">
-      <div class="verdito__lbl">Índice de aderência</div>
-      <div class="verdito__num" style="color:${v.cor}">${aderencia}%</div>
-    </div>
-    <div class="verdito__r">
-      <div class="verdito__t" style="color:${v.cor}">${v.t}</div>
-      <div class="verdito__d">${v.d}</div>
-    </div>
-  </div>`;
+  let h = `<div class="block laudo">
+    <div class="block__title"><h3>Laudo Comportamental</h3><span class="tag">parecer consultivo</span></div>
+    <p class="block__sub">Análise integrada do perfil de ${esc(primeiro)} — base para devolutiva e desenvolvimento.</p>`;
 
-  // Diagnóstico narrativo
-  h += `<div class="diag__grid">`;
+  // 1. Perfil comportamental detalhado
+  h += `<div class="laudo__sec"><h4 class="laudo__h">1. Perfil comportamental</h4>
+    <p class="laudo__p">${esc(DISC_DETAL[prim].desc)}</p>
+    <p class="laudo__p">O traço predominante é <b>${prim} — ${DISC_NOME[prim]}</b>, tendo <b>${sec} — ${DISC_NOME[sec]}</b> como estilo secundário, que ${SEC_INFLU[sec]}. A distribuição das escolhas no instrumento foi <b>${discDist}</b>, indicando o peso relativo de cada dimensão no comportamento natural.</p>
+    <p class="laudo__p"><b>Como tende a agir:</b> ${esc(DISC_DETAL[prim].ctx)}</p></div>`;
 
-  // Cultura
-  let cultTxt = `O alinhamento à cultura está em <b>${cultura.pct}%</b> (${cultura.band.label.toLowerCase()}). Como as afirmações desta seção foram construídas sobre os próprios valores da My Blue, esse índice reflete o quanto ${esc(primeiro)} pensa e age em sintonia com a empresa.`;
-  if(fortesC.length) cultTxt += ` Destaque positivo em <b>${fortesC.map(x=>x.nome).join("</b> e <b>")}</b>.`;
-  if(fracosNarr.length) cultTxt += ` Os pontos com mais espaço de evolução são <b>${fracosNarr.map(x=>x.nome).join("</b>, <b>")}</b>.`;
+  // 2. Pontos fortes
+  h += `<div class="laudo__sec"><h4 class="laudo__h">2. Pontos fortes</h4><div class="fa forte">`;
+  pFortes.forEach(p=> h += `<div class="fa__item"><span class="fa__ic">+</span><div class="fa__tx">${esc(p.t)}<small>${esc(p.s)}</small></div></div>`);
+  h += `</div></div>`;
+
+  // 3. Pontos de atenção
+  h += `<div class="laudo__sec"><h4 class="laudo__h">3. Pontos de atenção</h4><div class="fa aten">`;
+  pAten.forEach(p=> h += `<div class="fa__item"><span class="fa__ic">!</span><div class="fa__tx">${esc(p.t)}<small>${esc(p.s)}</small></div></div>`);
+  h += `</div></div>`;
+
+  // 4. Análise por competência
+  h += `<div class="laudo__sec"><h4 class="laudo__h">4. Análise por competência</h4><div class="diag__grid">`;
+  let cultTxt = `${COMP_TXT.s1[bandKey(cultura.band.label)]} Como as afirmações foram construídas sobre os próprios valores da My Blue, o índice de <b>${cultura.pct}%</b> reflete o quanto ${esc(primeiro)} pensa e age em sintonia com a empresa.`;
+  if(fortesC.length) cultTxt += ` Destaque em <b>${fortesC.map(x=>x.nome).join("</b>, <b>")}</b>.`;
+  if(fracosNarr.length) cultTxt += ` Mais espaço de evolução em <b>${fracosNarr.map(x=>x.nome).join("</b>, <b>")}</b>.`;
   h += diagCard("Cultura e Valores", cultura, cultTxt);
+  h += diagCard("Inteligência Emocional", eq, `${COMP_TXT.s3[bandKey(eq.band.label)]} (índice de <b>${eq.pct}%</b>)`);
+  h += diagCard("Competências Comerciais", com, `${COMP_TXT.s4[bandKey(com.band.label)]} (índice de <b>${com.pct}%</b>)`);
+  h += diagCard("Potencial de Liderança", lid, `${COMP_TXT.s5[bandKey(lid.band.label)]} (índice de <b>${lid.pct}%</b>)`);
+  h += `</div></div>`;
 
-  // DISC
-  let discTxt = `O perfil predominante é <b>${prim} — ${DISC_NOME[prim]}</b>, com <b>${sec} — ${DISC_NOME[sec]}</b> como traço secundário. Distribuição das escolhas: <b>${discDist}</b>. ${esc(ESTILO[prim].texto)}`;
-  h += diagCard("Perfil DISC", null, discTxt);
+  // 5. Adequação à cultura e ao cargo
+  h += `<div class="laudo__sec"><h4 class="laudo__h">5. Adequação à cultura e ao cargo</h4>
+    <p class="laudo__p">No eixo cultural, a aderência geral é <b>${cultura.pct}% (${cultura.band.label.toLowerCase()})</b>${fracosPDI.length?`, com os valores <b>${fracosPDI.map(x=>x.nome).join("</b> e <b>")}</b> como frentes prioritárias de aproximação`:""}.</p>
+    <p class="laudo__p">Considerando o contexto comercial e de relacionamento da função, o perfil <b>${prim} — ${DISC_NOME[prim]}</b> ${ROLEFIT[prim]}. As competências comerciais (<b>${com.pct}%</b>, ${com.band.label.toLowerCase()}) ${com.pct>=70?"sustentam bem":"ainda pedem reforço para"} a atuação na função, e a inteligência emocional (<b>${eq.pct}%</b>) ${eq.pct>=70?"favorece":"é fator a desenvolver na"} gestão da relação com o cliente.</p></div>`;
 
-  // EQ
-  h += diagCard("Inteligência Emocional", eq, `A inteligência emocional está em <b>${eq.pct}%</b> (${eq.band.label.toLowerCase()}) — capacidade de perceber, regular e usar as emoções a favor das relações e do resultado.`);
-  // Comercial
-  h += diagCard("Competências Comerciais", com, `As competências comerciais estão em <b>${com.pct}%</b> (${com.band.label.toLowerCase()}) — prospecção, negociação, manejo de objeções e relacionamento com a carteira.`);
-  // Liderança
-  h += diagCard("Potencial de Liderança", lid, `O potencial de liderança está em <b>${lid.pct}%</b> (${lid.band.label.toLowerCase()}) — influência, visão de conjunto e disposição para desenvolver pessoas, independente do cargo atual.`);
+  // 6. Parecer / aderência
+  h += `<div class="laudo__sec"><h4 class="laudo__h">6. Parecer e índice de aderência</h4>
+    <div class="verdito" style="border-color:${v.cor}">
+      <div class="verdito__l"><div class="verdito__lbl">Índice de aderência</div><div class="verdito__num" style="color:${v.cor}">${aderencia}%</div></div>
+      <div class="verdito__r"><div class="verdito__t" style="color:${v.cor}">${v.t}</div><div class="verdito__d">${v.d}</div></div>
+    </div></div>`;
 
-  h += `</div>`; // fim diag__grid
-
-  // PDI
-  h += `<div class="pdi">
-    <div class="pdi__head">Plano de Desenvolvimento Individual</div>`;
-
+  // 7. PDI
+  h += `<div class="laudo__sec"><h4 class="laudo__h">7. Plano de Desenvolvimento Individual</h4><div class="pdi">`;
   if(fortes.length){
     h += `<div class="pdi__sec"><div class="pdi__st">Forças a potencializar</div><ul class="pdi__ul forte">`;
     fortes.forEach(a=> h += `<li><b>${esc(a.nome)} (${a.pct}%)</b> — ${esc(FORCA_ACAO[a.k]||"alavancar esse ponto forte em desafios à altura.")}</li>`);
     h += `</ul></div>`;
   }
-
   h += `<div class="pdi__sec"><div class="pdi__st">Prioridades de desenvolvimento</div>`;
   if(!prioridades.length){
     h += `<p class="pdi__none">Todos os eixos estão em nível sólido. Foco em manter consistência e assumir desafios de maior complexidade.</p>`;
@@ -524,20 +599,19 @@ function diagnosticoHTML(c, nome){
     prioridades.forEach(a=>{
       let acoes = [];
       if(a.k==="s1"){ acoes = fracosPDI.map(x=>`Em <b>${esc(x.nome)}</b>: ${x.acao}.`); if(!acoes.length) acoes=["Reforçar a vivência prática dos valores no dia a dia."]; }
-      else acoes = (ACOES[a.k]||[]).slice(0,3).map(t=>esc(t));
-      h += `<div class="pdi__area">
-        <div class="pdi__atop"><span>${esc(a.nome)}</span><span class="pdi__apct" style="color:${a.band.cor}">${a.pct}% · ${a.band.label}</span></div>
-        <ul class="pdi__ul">${acoes.map(t=>`<li>${t}</li>`).join("")}</ul>
-      </div>`;
+      else acoes = (ACOES[a.k]||[]).map(t=>esc(t));
+      h += `<div class="pdi__area"><div class="pdi__atop"><span>${esc(a.nome)}</span><span class="pdi__apct" style="color:${a.band.cor}">${a.pct}% · ${a.band.label}</span></div><ul class="pdi__ul">${acoes.map(t=>`<li>${t}</li>`).join("")}</ul></div>`;
     });
   }
   h += `</div>`;
+  h += `<div class="pdi__sec"><div class="pdi__st">Equilíbrio do estilo (${prim} — ${DISC_NOME[prim]})</div><ul class="pdi__ul"><li>${esc(DISC_ACAO[prim])}</li></ul></div>`;
+  h += `</div></div>`;
 
-  // DISC balance
-  h += `<div class="pdi__sec"><div class="pdi__st">Equilíbrio do estilo (${prim} — ${DISC_NOME[prim]})</div>
-    <ul class="pdi__ul"><li>${esc(DISC_ACAO[prim])}</li></ul></div>`;
+  // 8. Recomendações para a devolutiva
+  h += `<div class="laudo__sec"><h4 class="laudo__h">8. Recomendações para a devolutiva</h4>
+    <p class="laudo__p">Sugere-se conduzir uma conversa de devolutiva começando pelo reconhecimento dos pontos fortes, validando-os com exemplos concretos do dia a dia. Em seguida, apresentar os pontos de atenção como oportunidades de evolução — não como falhas — pactuando 2 a 3 ações prioritárias do plano acima com prazos definidos.</p>
+    <p class="laudo__p">Os índices refletem a autopercepção do avaliado; recomenda-se confrontá-los com a percepção da liderança e com indicadores reais de desempenho para calibrar o plano. Um novo ciclo de avaliação em 6 meses permite medir a evolução de forma objetiva.</p></div>`;
 
-  h += `</div>`; // fim pdi
   h += `</div>`; // fim block
   return h;
 }
