@@ -382,7 +382,7 @@ const IDENT = [
 const SECTIONS = [
   {
     title:"Cultura e Valores",
-    intro:"As afirmações abaixo refletem princípios que orientam a cultura da My Blue. Para cada uma, marque a opção que melhor representa sua visão.",
+    intro:"Para cada afirmação, marque a opção que melhor representa você. Não existe resposta certa ou errada — responda com total sinceridade.",
     type:"likert",
     prefix:"s1",
     items:[
@@ -477,7 +477,7 @@ const SECTIONS = [
   },
   {
     title:"Inteligência Emocional",
-    intro:"As afirmações avaliam como você percebe, compreende e gerencia suas emoções e as das pessoas ao seu redor. Responda com base no que realmente acontece — não no que você acha que deveria acontecer.",
+    intro:"Para cada afirmação, responda com base no que realmente acontece com você — não no que acha que deveria acontecer.",
     type:"likert",
     prefix:"s3",
     items:[
@@ -506,7 +506,7 @@ const SECTIONS = [
   },
   {
     title:"Competências Comerciais",
-    intro:"Esta seção avalia suas competências e comportamentos no contexto de vendas e relacionamento comercial. Responda com base na sua experiência real na função.",
+    intro:"Responda com base na sua experiência real no dia a dia da função, e não em situações ideais.",
     type:"likert",
     prefix:"s4",
     items:[
@@ -544,7 +544,7 @@ const SECTIONS = [
   },
   {
     title:"Potencial de Liderança",
-    intro:"Esta seção avalia comportamentos relacionados ao potencial de liderança — independentemente do cargo que você ocupa hoje. Responda com honestidade sobre como você se vê naturalmente, não como gostaria de ser visto.",
+    intro:"Responda com honestidade sobre como você se vê naturalmente, não como gostaria de ser visto.",
     type:"likert",
     prefix:"s5",
     items:[
@@ -569,7 +569,7 @@ const SECTIONS = [
   },
   {
     title:"Visão de Futuro",
-    intro:"Esta última seção busca entender sua visão de futuro, suas ambições e o que te move profissionalmente. Não há resposta certa — seja o mais honesto e específico possível.",
+    intro:"Escolha a alternativa que mais combina com você. Não há resposta certa — seja o mais honesto possível.",
     type:"choices-only",
     prefix:"s6",
     choices:[
@@ -622,8 +622,8 @@ SECTIONS.forEach((sec,si)=>{
   const node = el("section","section");
   node.id = "sec-"+si;
   node.innerHTML = `<div class="section__head">
-      <span class="section__num">${roman(si)}</span>
-      <h2 class="section__title">${esc(sec.title)}</h2>
+      <span class="section__num">${String(si+1).padStart(2,"0")}</span>
+      <h2 class="section__title">Seção ${si+1}</h2>
     </div>
     <p class="section__intro">${esc(sec.intro)}</p>`;
 
