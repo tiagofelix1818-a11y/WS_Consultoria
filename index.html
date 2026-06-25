@@ -923,6 +923,38 @@ function showDone(payload){
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
+/* ============ AUTOPREENCHIMENTO DE TESTE (oculto) ============ */
+/* Abra a página com ?dev=1 para ver o botão. Não aparece para os avaliados. */
+function devFill(){
+  const hoje = new Date().toISOString().slice(0,10);
+  const amostra = {nome:"João da Silva (TESTE)", cargo:"Consultor comercial", data_aplicacao:hoje, cidade_ula:"Fortaleza / Matriz", tempo_empresa:"1 ano"};
+  Object.keys(amostra).forEach(k=>{
+    const i = document.getElementById(k);
+    if(i){ i.value = amostra[k]; i.dispatchEvent(new Event("input",{bubbles:true})); }
+  });
+  document.querySelectorAll(".qcard").forEach(card=>{
+    if(card.dataset.mais){
+      const M = card.querySelectorAll(".fcbtn.mais");
+      const N = card.querySelectorAll(".fcbtn.menos");
+      const im = Math.floor(Math.random()*M.length);
+      let inx = Math.floor(Math.random()*N.length);
+      if(inx===im) inx = (im+1) % N.length;
+      M[im].click(); N[inx].click();
+    } else {
+      const radios = card.querySelectorAll(".likert input, .choices input");
+      if(radios.length) radios[Math.floor(Math.random()*radios.length)].click();
+    }
+  });
+  window.scrollTo({top:document.body.scrollHeight,behavior:"smooth"});
+}
+if(new URLSearchParams(location.search).get("dev")==="1"){
+  const b = document.createElement("button");
+  b.textContent = "⚙ Preencher teste";
+  b.style.cssText = "position:fixed;bottom:18px;right:18px;z-index:999;background:#173B45;color:#fff;border:none;border-radius:10px;padding:12px 16px;font:600 14px Inter,system-ui,sans-serif;cursor:pointer;box-shadow:0 8px 22px rgba(0,0,0,.25)";
+  b.addEventListener("click",devFill);
+  document.body.appendChild(b);
+}
+
 updateProgress();
 </script>
 </body>
