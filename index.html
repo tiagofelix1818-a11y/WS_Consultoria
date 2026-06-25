@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Avaliação de Perfil Comportamental · My Blue</title>
+<meta name="description" content="Instrumento confidencial de avaliação de perfil comportamental e inteligência emocional — WS Gestão, Consultoria e Treinamentos." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#14222A;
+    --petrol:#20505C;
+    --petrol-700:#173B45;
+    --petrol-900:#10282F;
+    --accent:#C98A3C;
+    --accent-soft:#F3E6D2;
+    --mist:#F4F7F7;
+    --surface:#FFFFFF;
+    --line:#DCE6E6;
+    --line-strong:#C3D2D2;
+    --muted:#5E7077;
+    --muted-2:#7E8E93;
+    --ok:#2F7D5B;
+    --err:#C0492F;
+    --radius:14px;
+    --shadow:0 1px 2px rgba(20,34,42,.04), 0 8px 28px rgba(20,34,42,.06);
+    --shadow-lg:0 12px 48px rgba(16,40,47,.16);
+    --maxw:760px;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    color:var(--ink);
+    background:var(--mist);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--accent-soft);}
+
+  /* ---------- progress ---------- */
+  .progress{
+    position:sticky;top:0;left:0;right:0;z-index:50;
+    background:rgba(244,247,247,.86);
+    backdrop-filter:saturate(140%) blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .progress__inner{
+    max-width:var(--maxw);margin:0 auto;padding:11px 20px;
+    display:flex;align-items:center;gap:14px;
+  }
+  .progress__brand{
+    font-family:"Fraunces",serif;font-weight:600;font-size:15px;letter-spacing:.02em;
+    color:var(--petrol-700);white-space:nowrap;
+  }
+  .progress__brand b{color:var(--accent);font-weight:700;}
+  .progress__track{
+    flex:1;height:6px;border-radius:99px;background:var(--line);overflow:hidden;
+  }
+  .progress__fill{
+    height:100%;width:0%;border-radius:99px;
+    background:linear-gradient(90deg,var(--petrol),var(--accent));
+    transition:width .35s cubic-bezier(.4,0,.2,1);
+  }
+  .progress__count{
+    font-size:12.5px;font-weight:600;color:var(--muted);white-space:nowrap;
+    font-variant-numeric:tabular-nums;min-width:46px;text-align:right;
+  }
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px 120px;}
+
+  /* ---------- hero ---------- */
+  .hero{padding:54px 0 30px;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    font-size:12px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--petrol);margin-bottom:22px;
+  }
+  .eyebrow::before{content:"";width:26px;height:1.5px;background:var(--accent);display:inline-block;}
+  .hero h1{
+    font-family:"Fraunces",serif;font-weight:600;
+    font-size:clamp(31px,7vw,46px);line-height:1.08;letter-spacing:-.01em;
+    margin:0 0 18px;color:var(--ink);
+  }
+  .hero h1 em{font-style:italic;color:var(--petrol);}
+  .hero__lead{font-size:16.5px;color:var(--muted);max-width:58ch;margin:0 0 26px;}
+  .confidential{
+    display:flex;gap:13px;align-items:flex-start;
+    background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:10px;padding:15px 17px;font-size:14px;color:var(--muted);
+  }
+  .confidential svg{flex:none;margin-top:1px;}
+  .confidential b{color:var(--ink);font-weight:600;}
+
+  .orient{margin-top:26px;border-top:1px solid var(--line);padding-top:24px;}
+  .orient h2{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted-2);margin:0 0 14px;}
+  .orient ol{margin:0;padding:0;list-style:none;counter-reset:o;display:grid;gap:11px;}
+  .orient li{
+    counter-increment:o;position:relative;padding-left:38px;font-size:14.5px;color:var(--ink);
+  }
+  .orient li::before{
+    content:counter(o);position:absolute;left:0;top:-1px;
+    width:25px;height:25px;border-radius:50%;
+    background:var(--petrol);color:#fff;font-size:12.5px;font-weight:700;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* ---------- identification ---------- */
+  .idcard{
+    margin-top:34px;background:var(--surface);border:1px solid var(--line);
+    border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;
+  }
+  .idcard__head{
+    background:var(--petrol-900);color:#fff;padding:15px 22px;
+    font-size:12.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+    display:flex;align-items:center;gap:10px;
+  }
+  .idcard__head .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);}
+  .idgrid{padding:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px 18px;}
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .field.full{grid-column:1/-1;}
+  .field label{font-size:13px;font-weight:600;color:var(--muted);}
+  .field input{
+    font-family:inherit;font-size:15px;color:var(--ink);
+    padding:11px 13px;border:1px solid var(--line-strong);border-radius:9px;
+    background:#fff;transition:border-color .15s, box-shadow .15s;
+  }
+  .field input:focus{outline:none;border-color:var(--petrol);box-shadow:0 0 0 3px rgba(32,80,92,.12);}
+  .field input::placeholder{color:#A9B6B9;}
+
+  /* ---------- sections ---------- */
+  .section{margin-top:46px;scroll-margin-top:74px;}
+  .section__head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;}
+  .section__num{
+    font-family:"Fraunces",serif;font-weight:600;font-size:30px;color:var(--accent);
+    line-height:1;flex:none;font-variant-numeric:tabular-nums;
+  }
+  .section__title{font-family:"Fraunces",serif;font-weight:600;font-size:24px;color:var(--ink);margin:0;line-height:1.15;}
+  .section__intro{font-size:14.5px;color:var(--muted);margin:6px 0 0 46px;max-width:60ch;}
+  @media (max-width:560px){.section__intro{margin-left:0;}}
+
+  .qcard{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:18px 18px 16px;margin-top:16px;
+    transition:border-color .2s;
+  }
+  .qcard.is-error{border-color:var(--err);box-shadow:0 0 0 3px rgba(192,73,47,.10);}
+  .qcard.is-answered{border-color:var(--line);}
+  .qhead{display:flex;gap:11px;margin-bottom:14px;}
+  .qnum{
+    font-size:12px;font-weight:700;color:var(--petrol);background:var(--mist);
+    border:1px solid var(--line);border-radius:7px;padding:2px 8px;height:fit-content;
+    flex:none;font-variant-numeric:tabular-nums;letter-spacing:.02em;
+  }
+  .qtext{font-size:15.5px;color:var(--ink);font-weight:500;line-height:1.45;}
+
+  /* likert */
+  .likert{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+  .likert .opt{
+    position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+    gap:6px;text-align:center;padding:11px 6px 10px;cursor:pointer;
+    border:1.5px solid var(--line-strong);border-radius:11px;background:#fff;
+    transition:border-color .12s,background .12s,transform .04s;min-height:74px;
+  }
+  .likert .opt:hover{border-color:var(--petrol);}
+  .likert .opt:active{transform:translateY(1px);}
+  .likert .opt input{position:absolute;opacity:0;pointer-events:none;}
+  .likert .opt .val{
+    width:25px;height:25px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:13px;font-weight:700;color:var(--muted);background:var(--mist);border:1px solid var(--line);
+    transition:all .12s;
+  }
+  .likert .opt .lab{font-size:11px;line-height:1.2;color:var(--muted);font-weight:500;}
+  .likert .opt.is-on{border-color:var(--accent);background:var(--accent-soft);}
+  .likert .opt.is-on .val{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .likert .opt.is-on .lab{color:var(--petrol-700);font-weight:600;}
+
+  /* multiple choice */
+  .choices{display:grid;gap:9px;}
+  .choice{
+    display:flex;gap:12px;align-items:flex-start;padding:13px 14px;cursor:pointer;
+    border:1.5px solid var(--line-strong);border-radius:11px;background:#fff;
+    transition:border-color .12s,background .12s;
+  }
+  .choice:hover{border-color:var(--petrol);}
+  .choice input{position:absolute;opacity:0;pointer-events:none;}
+  .choice .mark{
+    flex:none;width:23px;height:23px;border-radius:50%;border:2px solid var(--line-strong);
+    display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:transparent;
+    transition:all .12s;margin-top:1px;
+  }
+  .choice .ctext{font-size:14.5px;color:var(--ink);line-height:1.4;}
+  .choice .ctext b{color:var(--petrol-700);font-weight:700;margin-right:3px;}
+  .choice.is-on{border-color:var(--accent);background:var(--accent-soft);}
+  .choice.is-on .mark{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+  /* forced choice (MAIS / MENOS) */
+  .fc{margin-top:14px;}
+  .fc__legend{
+    display:grid;grid-template-columns:1fr 58px 58px;gap:8px;align-items:end;
+    padding:0 2px 8px;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted-2);
+  }
+  .fc__legend .h{text-align:center;}
+  .fc__legend .h.mais{color:var(--ok);}
+  .fc__legend .h.menos{color:var(--err);}
+  .fcrow{
+    display:grid;grid-template-columns:1fr 58px 58px;gap:8px;align-items:center;
+    padding:9px 4px;border-top:1px solid var(--line);
+  }
+  .fcrow:first-of-type{border-top:none;}
+  .fcrow .word{font-size:14.5px;color:var(--ink);font-weight:500;}
+  .fcbtn{
+    width:44px;height:38px;margin:0 auto;border-radius:9px;cursor:pointer;
+    border:1.5px solid var(--line-strong);background:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:#C3CED0;
+    transition:all .12s;-webkit-tap-highlight-color:transparent;
+  }
+  .fcbtn:hover{border-color:var(--petrol);}
+  .fcbtn.mais.is-on{background:#E7F3EC;border-color:var(--ok);color:var(--ok);}
+  .fcbtn.menos.is-on{background:#FBEAE5;border-color:var(--err);color:var(--err);}
+  .fcbtn.is-disabled{opacity:.35;cursor:not-allowed;}
+
+  .grouptag{
+    font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--petrol);
+    margin-bottom:2px;
+  }
+  .scenario-q{font-size:15.5px;color:var(--ink);font-weight:600;line-height:1.4;}
+  .scenario-q span{display:block;font-weight:400;color:var(--muted);font-size:14px;margin-top:3px;}
+
+  /* ---------- submit ---------- */
+  .submitbar{margin-top:46px;}
+  .errsummary{
+    display:none;margin-bottom:18px;background:#FBEAE5;border:1px solid #E8C3B8;
+    border-radius:11px;padding:14px 16px;color:var(--err);font-size:14px;font-weight:500;
+  }
+  .errsummary.show{display:flex;gap:10px;align-items:flex-start;}
+  .errsummary a{color:var(--err);font-weight:700;text-decoration:underline;cursor:pointer;}
+  .btn{
+    width:100%;font-family:inherit;font-size:16px;font-weight:600;color:#fff;cursor:pointer;
+    background:var(--petrol);border:none;border-radius:12px;padding:17px 24px;
+    box-shadow:0 8px 22px rgba(32,80,92,.22);transition:background .15s,transform .05s;
+    display:flex;align-items:center;justify-content:center;gap:10px;
+  }
+  .btn:hover{background:var(--petrol-700);}
+  .btn:active{transform:translateY(1px);}
+  .btn:disabled{opacity:.7;cursor:wait;}
+  .btn .spin{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:none;}
+  .btn.loading .spin{display:block;}
+  .btn.loading .btn__label{opacity:.85;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .submit-note{text-align:center;font-size:12.5px;color:var(--muted-2);margin-top:14px;}
+
+  footer.legal{
+    margin-top:40px;border-top:1px solid var(--line);padding-top:20px;
+    font-size:12px;color:var(--muted-2);text-align:center;line-height:1.6;
+  }
+  footer.legal b{color:var(--muted);font-weight:600;}
+
+  /* ---------- success ---------- */
+  .done{
+    display:none;min-height:80vh;align-items:center;justify-content:center;text-align:center;padding:40px 20px;
+  }
+  .done.show{display:flex;}
+  .done__card{max-width:480px;}
+  .done__check{
+    width:74px;height:74px;border-radius:50%;background:var(--accent-soft);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 24px;
+    animation:pop .5s cubic-bezier(.2,1.3,.4,1);
+  }
+  @keyframes pop{0%{transform:scale(.5);opacity:0;}100%{transform:scale(1);opacity:1;}}
+  .done h2{font-family:"Fraunces",serif;font-weight:600;font-size:30px;color:var(--ink);margin:0 0 12px;}
+  .done p{font-size:16px;color:var(--muted);margin:0 0 8px;}
+  .done .name{color:var(--petrol-700);font-weight:600;}
+
+  @media (max-width:560px){
+    .idgrid{grid-template-columns:1fr;}
+    .likert{grid-template-columns:1fr 1fr;}
+    .progress__brand{font-size:13px;}
+    .hero{padding:38px 0 24px;}
+    .section__num{font-size:25px;}
+    .section__title{font-size:21px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="progress" role="progressbar" aria-label="Progresso da avaliação" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+  <div class="progress__inner">
+    <span class="progress__brand">WS<b>·</b>Consultoria</span>
+    <div class="progress__track"><div class="progress__fill" id="bar"></div></div>
+    <span class="progress__count" id="count">0%</span>
+  </div>
+</div>
+
+<main class="wrap" id="form">
+
+  <header class="hero">
+    <span class="eyebrow">My Blue · Desenvolvimento de Pessoas</span>
+    <h1>Avaliação de Perfil <em>Comportamental</em> e Inteligência Emocional</h1>
+    <p class="hero__lead">Um instrumento de autoconhecimento. Quanto mais você se conhece, mais rápido cresce. Não existem respostas certas ou erradas — responda pelo que você realmente é.</p>
+    <div class="confidential">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2l7 3v6c0 4.5-3 8.5-7 9-4-.5-7-4.5-7-9V5l7-3z" stroke="#C98A3C" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#C98A3C" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><b>Confidencial.</b> Suas respostas são tratadas com total sigilo e usadas exclusivamente para a construção do seu Plano de Desenvolvimento Individual.</div>
+    </div>
+
+    <div class="orient">
+      <h2>Orientações para preenchimento</h2>
+      <ol>
+        <li>Leia cada questão com atenção antes de responder e não deixe nenhuma em branco.</li>
+        <li>Responda com sinceridade — quanto mais honesto você for, mais útil o resultado será para você.</li>
+        <li>Reserve um tempo tranquilo. A avaliação leva cerca de 12 a 15 minutos.</li>
+      </ol>
+    </div>
+  </header>
+
+  <section class="idcard" aria-label="Identificação do profissional">
+    <div class="idcard__head"><span class="dot"></span>Identificação do profissional</div>
+    <div class="idgrid" id="idgrid"></div>
+  </section>
+
+  <div id="sections"></div>
+
+  <div class="submitbar">
+    <div class="errsummary" id="errsummary">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:none;margin-top:1px"><circle cx="12" cy="12" r="9" stroke="#C0492F" stroke-width="1.6"/><path d="M12 7v6M12 16.5v.5" stroke="#C0492F" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <span><span id="errcount"></span> Algumas questões ainda estão sem resposta. <a id="gotofirst">Ir para a primeira pendência →</a></span>
+    </div>
+    <button class="btn" id="submit" type="button">
+      <span class="spin"></span>
+      <span class="btn__label">Enviar avaliação</span>
+    </button>
+    <p class="submit-note">Ao enviar, suas respostas seguem direto para a equipe da WS Consultoria.</p>
+  </div>
+
+  <footer class="legal">
+    <b>WS Gestão, Consultoria e Treinamentos LTDA</b><br/>
+    Documento confidencial — uso exclusivo para fins de desenvolvimento profissional.
+  </footer>
+
+</main>
+
+<div class="done" id="done">
+  <div class="done__card">
+    <div class="done__check">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#C98A3C" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h2>Avaliação enviada</h2>
+    <p>Obrigado pela sua participação<span class="name" id="doneName"></span>.</p>
+    <p>Suas respostas foram registradas com sucesso e serão tratadas com total confidencialidade.</p>
+  </div>
+</div>
+
+<script>
+/* ====================================================================
+   CONFIGURAÇÃO — cole aqui a URL do seu Web App do Apps Script.
+   Enquanto estiver vazio (""), o envio baixa um arquivo .json de teste.
+   ==================================================================== */
+const ENDPOINT_URL = "";
+
+/* ============================ DADOS ================================ */
+const ESCALA = [
+  {v:"1", lab:"Discordo totalmente"},
+  {v:"2", lab:"Discordo"},
+  {v:"3", lab:"Concordo"},
+  {v:"4", lab:"Concordo totalmente"},
+];
+
+const IDENT = [
+  {key:"nome", label:"Nome completo", ph:"Seu nome", full:true},
+  {key:"cargo", label:"Cargo / Função", ph:"Ex.: Consultor comercial"},
+  {key:"data_aplicacao", label:"Data de aplicação", ph:"", type:"date"},
+  {key:"cidade_ula", label:"Cidade / Unidade de atuação", ph:"Ex.: Fortaleza / Matriz"},
+  {key:"tempo_empresa", label:"Tempo de empresa", ph:"Ex.: 1 ano e 4 meses"},
+];
+
+const SECTIONS = [
+  {
+    title:"Cultura e Valores",
+    intro:"As afirmações abaixo refletem princípios que orientam a cultura da My Blue. Para cada uma, marque a opção que melhor representa sua visão.",
+    type:"likert",
+    prefix:"s1",
+    items:[
+      "Quando identifico um problema, meu primeiro movimento é buscar a solução mais direta possível — sem criar camadas desnecessárias.",
+      "Processos simples, bem ensinados e com propósito claro têm mais chance de ser seguidos com consistência do que processos complexos.",
+      "Para fazer parte do time mais ágil e capacitado do mercado, precisamos eliminar o que complica sem agregar valor ao cliente.",
+      "Construo credibilidade pela coerência entre o que prometo e o que entrego — tanto com clientes quanto com colegas.",
+      "Prefiro ser transparente sobre um problema do que escondê-lo para parecer que está tudo certo.",
+      "Minha integridade não muda conforme a situação — ajo da mesma forma independente de quem está me observando.",
+      "Proporcionar segurança e tranquilidade financeira ao condomínio é um objetivo que me envolve diretamente — independente da minha função.",
+      "Cada interação com o cliente é uma oportunidade de gerar encantamento e reforçar o posicionamento da My Blue no mercado.",
+      "Quando avalio uma decisão interna, levo em conta o impacto que ela terá na experiência do cliente final.",
+      "O time mais capacitado do mercado só é construído quando as pessoas são genuinamente desenvolvidas, reconhecidas e respeitadas.",
+      "Clima organizacional saudável não é luxo — é condição para entregar resultados consistentes e de qualidade.",
+      "Reconheço e celebro as conquistas dos colegas com a mesma energia que celebro as minhas próprias.",
+      "Usar os recursos com critério e eficiência faz parte da minha responsabilidade profissional — não apenas das áreas financeiras.",
+      "Ser competitivo e criterioso com investimentos não são objetivos conflitantes — um reforça o outro.",
+      "Antes de solicitar recursos ou investimentos, avalio se já existe uma forma eficiente de alcançar o mesmo resultado com o que temos.",
+      "A missão de ser o time mais ágil e capacitado do mercado exige que eu assuma responsabilidade ativa pelo meu resultado — sem esperar que outros me empurrem.",
+      "Para sermos a maior empresa do segmento no Nordeste, cada membro do time precisa entender seu papel e entregar com excelência.",
+      "Mantenho disciplina e foco mesmo em atividades que não são minhas favoritas — resultado não é opcional.",
+      "Processos que funcionam hoje podem ser aprimorados amanhã — questiono constantemente se existe uma forma melhor de fazer.",
+      "A inovação que nos tornará a maior empresa do Nordeste começa em atitudes simples do dia a dia — não apenas em grandes projetos.",
+      "Adapto-me rapidamente a mudanças e enxergo nelas uma oportunidade de crescimento, não uma ameaça.",
+    ],
+  },
+  {
+    title:"Perfil Comportamental — Escolha Forçada",
+    intro:"Para cada grupo de 4 palavras, marque ✓ na coluna MAIS ao lado da que MAIS descreve você e ✗ na coluna MENOS ao lado da que MENOS descreve você. Apenas uma em cada coluna. Escolha pelo que você realmente é, não pelo que gostaria de ser.",
+    type:"forced",
+    prefix:"s2a",
+    label:"Grupo",
+    groups:[
+      ["Calmo e paciente","Direto e objetivo","Cuidadoso e preciso","Entusiasta e animado"],
+      ["Analítico","Inspirador","Determinado","Leal"],
+      ["Comunicativo","Colaborativo","Competitivo","Criterioso"],
+      ["Meticuloso","Decidido","Persuasivo","Confiável"],
+      ["Estável","Sistemático","Otimista","Ousado"],
+      ["Expressivo","Exigente","Perfeccionista","Pacificador"],
+      ["Organizado","Prestativo","Independente","Sociável"],
+      ["Harmonioso","Carismático","Detalhista","Resoluto"],
+      ["Cauteloso","Gentil","Entusiasmado","Incisivo"],
+      ["Relacional","Assertivo","Rigoroso","Consistente"],
+      ["Paciente","Rápido","Criativo","Lógico"],
+      ["Preciso","Tranquilo","Dominante","Sedutor"],
+    ],
+  },
+  {
+    title:"Cenários Comportamentais",
+    intro:"Para cada situação, marque ✓ MAIS na opção que melhor representa como você agiria naturalmente e ✗ MENOS na que menos representa seu comportamento. Apenas uma em cada coluna.",
+    type:"forced",
+    prefix:"s2b",
+    label:"Cenário",
+    scenarios:[
+      {q:"Você recebe uma meta agressiva para o mês, com prazo curto e poucos recursos. Como reage?", opts:[
+        "Organizo minha rotina com calma, foco no que posso controlar e executo de forma consistente.",
+        "Analiso os dados disponíveis, identifico os riscos e estruturo um plano detalhado antes de agir.",
+        "Estabeleço o plano de ataque imediatamente e começo a executar — sem esperar aprovação de ninguém.",
+        "Converso com o time, levanto a energia e busco engajar todos em torno do objetivo.",
+      ]},
+      {q:"Um cliente está insatisfeito e ameaça cancelar o contrato. Qual é sua primeira reação?", opts:[
+        "Levanto todas as informações do caso, identifico a causa raiz e apresento uma solução estruturada.",
+        "Vou direto ao ponto, apresento soluções concretas e negocio com firmeza para manter o contrato.",
+        "Ouço o cliente com atenção, crio conexão emocional e uso o relacionamento para reverter a situação.",
+        "Demonstro empatia, garanto que o problema será resolvido e acompanho de perto até a satisfação total.",
+      ]},
+      {q:"Você discorda da decisão tomada pelo seu líder. O que você faz?", opts:[
+        "Busco o momento certo para conversar, uso persuasão e tento influenciar a decisão de forma positiva.",
+        "Reúno dados e evidências que embasam minha posição e apresento de forma lógica e estruturada.",
+        "Comunico diretamente minha discordância e apresento os argumentos para defender minha posição.",
+        "Aceito a decisão para preservar o ambiente, mas compartilho minha visão em conversa privada e respeitosa.",
+      ]},
+      {q:"Você precisa apresentar o portfólio da My Blue para um novo cliente em potencial. Como se prepara?", opts:[
+        "Monto uma apresentação técnica e detalhada, com dados, comparativos e embasamento sólido.",
+        "Preparo tudo com antecedência, reviso os materiais e garanto que estou seguro para responder cada dúvida.",
+        "Identifico os pontos mais impactantes e vou direto ao que o cliente precisa ouvir para decidir.",
+        "Crio uma apresentação envolvente, com histórias e energia — quero que o cliente se encante pela experiência.",
+      ]},
+      {q:"O processo de trabalho mudou de forma repentina, sem aviso prévio. Como você reage?", opts:[
+        "Sinto desconforto, mas me adapto com o tempo — prefiro que as mudanças sejam bem comunicadas antes.",
+        "Avalio rapidamente se a mudança faz sentido. Se sim, adapto. Se não, questiono e proponho ajuste.",
+        "Quero entender o motivo da mudança, os impactos e como os novos processos funcionam antes de adotar.",
+        "Encaro com leveza, me adapto rapidamente e ajudo os colegas a verem o lado positivo da mudança.",
+      ]},
+      {q:"Você está diante de uma oportunidade de negócio, mas há riscos envolvidos. O que você faz?", opts:[
+        "Acredito na oportunidade, engajo as pessoas certas e toco pra frente com otimismo.",
+        "Mapeio os riscos, analiso as probabilidades e só avanço se os dados indicarem viabilidade.",
+        "Avalio se tenho suporte suficiente e, se a equipe estiver alinhada, avanço com cuidado.",
+        "Avanço. O risco faz parte do jogo — quem não arrisca não cresce.",
+      ]},
+    ],
+  },
+  {
+    title:"Inteligência Emocional",
+    intro:"As afirmações avaliam como você percebe, compreende e gerencia suas emoções e as das pessoas ao seu redor. Responda com base no que realmente acontece — não no que você acha que deveria acontecer.",
+    type:"likert",
+    prefix:"s3",
+    items:[
+      "Consigo identificar com precisão o que estou sentindo no momento em que a emoção aparece.",
+      "Quando estou frustrado ou irritado, consigo me acalmar antes de responder ou agir.",
+      "Percebo facilmente quando uma pessoa ao meu redor está desconfortável, mesmo que ela não diga nada.",
+      "Meu humor raramente impacta negativamente minha produtividade ou meu relacionamento com os colegas.",
+      "Consigo me motivar mesmo em períodos de baixos resultados ou feedbacks negativos.",
+      "Quando recebo uma crítica, consigo separar a crítica ao meu trabalho da crítica à minha pessoa.",
+      "Tenho clareza sobre quais situações ou gatilhos tendem a me tirar do equilíbrio emocional.",
+      "Consigo adaptar meu discurso e tom de voz conforme o estado emocional da pessoa com quem estou.",
+      "Em situações de conflito, priorizo a resolução do problema em vez de ter razão.",
+      "Reconheço e celebro as conquistas dos colegas com genuína satisfação.",
+      "Consigo manter o foco e a calma quando o ambiente ao meu redor está caótico ou tenso.",
+      "Tenho facilidade em pedir desculpas e reconhecer quando errei, mesmo em público.",
+    ],
+    choices:[
+      {key:"mc1", q:"Quando um colega age de forma que te irrita ou decepciona, sua primeira reação é:", opts:[
+        ["A","Conversar diretamente com a pessoa para entender o que houve"],
+        ["B","Me afastar por um tempo para processar antes de reagir"],
+        ["C","Desabafar com outra pessoa de confiança"],
+        ["D","Ignorar e focar no meu trabalho"],
+        ["E","Comunicar à liderança se a situação for recorrente"],
+      ]},
+    ],
+  },
+  {
+    title:"Competências Comerciais",
+    intro:"Esta seção avalia suas competências e comportamentos no contexto de vendas e relacionamento comercial. Responda com base na sua experiência real na função.",
+    type:"likert",
+    prefix:"s4",
+    items:[
+      "Sinto prazer genuíno no processo de prospectar e abordar novos clientes.",
+      "Consigo identificar rapidamente as necessidades reais do cliente, mesmo quando ele não as verbaliza claramente.",
+      "Não desisto facilmente de uma negociação — busco alternativas antes de aceitar um 'não'.",
+      "Mantenho um ritmo consistente de atividades comerciais mesmo sem pressão externa.",
+      "Tenho facilidade em construir rapport (conexão genuína) logo nos primeiros minutos de uma conversa.",
+      "Consigo apresentar o valor do produto/serviço de forma clara sem precisar recorrer ao desconto.",
+      "Faço acompanhamento ativo dos clientes em negociação, sem esperar que eles retornem.",
+      "Sei lidar com objeções de forma construtiva, sem me sentir atacado pessoalmente.",
+      "Tenho disciplina para registrar e atualizar informações sobre clientes e negociações.",
+      "Conheço profundamente o produto/serviço que vendo e consigo argumentar com segurança técnica.",
+      "Consigo identificar o momento certo para pedir o fechamento sem pressionar ou subestimar o cliente.",
+      "Busco constantemente ampliar minha carteira por meio de indicações dos clientes atuais.",
+    ],
+    choices:[
+      {key:"mc1", q:"Qual etapa do processo de vendas você considera seu maior ponto forte?", opts:[
+        ["A","Prospecção e geração de novos contatos"],
+        ["B","Abordagem inicial e criação de conexão (rapport)"],
+        ["C","Diagnóstico e identificação de necessidades"],
+        ["D","Apresentação e demonstração de valor"],
+        ["E","Negociação e manejo de objeções"],
+        ["F","Fechamento e formalização do contrato"],
+        ["G","Pós-venda e relacionamento com a carteira"],
+      ]},
+      {key:"mc2", q:"Quando não estou atingindo minha meta, a primeira coisa que faço é:", opts:[
+        ["A","Analisar meu funil e identificar em qual etapa estou perdendo negócios"],
+        ["B","Aumentar o volume de prospecção e contatos"],
+        ["C","Pedir orientação ao líder ou a um colega mais experiente"],
+        ["D","Revisar minha abordagem e discurso comercial"],
+        ["E","Intensificar o acompanhamento dos negócios em aberto"],
+      ]},
+    ],
+  },
+  {
+    title:"Potencial de Liderança",
+    intro:"Esta seção avalia comportamentos relacionados ao potencial de liderança — independentemente do cargo que você ocupa hoje. Responda com honestidade sobre como você se vê naturalmente, não como gostaria de ser visto.",
+    type:"likert",
+    prefix:"s5",
+    items:[
+      "As pessoas ao meu redor costumam me buscar para pedir opinião ou orientação, mesmo que eu não seja o líder formal.",
+      "Consigo mobilizar colegas em torno de um objetivo, mesmo sem autoridade hierárquica sobre eles.",
+      "Tenho facilidade em enxergar o quadro geral de uma situação, além dos detalhes imediatos.",
+      "Me sinto responsável pelo resultado do grupo, não apenas pelo meu resultado individual.",
+      "Consigo dar feedbacks difíceis a colegas de forma construtiva e respeitosa.",
+      "Tomo decisões com segurança mesmo quando não tenho todas as informações disponíveis.",
+      "Prefiro desenvolver as pessoas ao meu redor do que fazer tudo sozinho.",
+      "Sei reconhecer e valorizar contribuições dos colegas de forma genuína e específica.",
+    ],
+    choices:[
+      {key:"mc1", q:"Se você fosse promovido a uma posição de liderança hoje, qual seria seu maior desafio?", opts:[
+        ["A","Manter a autoridade sem perder a proximidade com o time"],
+        ["B","Cobrar resultados sem ser percebido como agressivo ou injusto"],
+        ["C","Delegar tarefas e confiar que serão bem executadas"],
+        ["D","Tomar decisões difíceis que impactam pessoas"],
+        ["E","Equilibrar minha produtividade individual com o desenvolvimento do time"],
+      ]},
+    ],
+  },
+  {
+    title:"Visão de Futuro",
+    intro:"Esta última seção busca entender sua visão de futuro, suas ambições e o que te move profissionalmente. Não há resposta certa — seja o mais honesto e específico possível.",
+    type:"choices-only",
+    prefix:"s6",
+    choices:[
+      {key:"mc1", q:"O que mais te motiva no trabalho?", opts:[
+        ["A","Atingir e superar metas e resultados"],
+        ["B","Ser reconhecido e valorizado pela liderança e colegas"],
+        ["C","Crescer na carreira e assumir mais responsabilidades"],
+        ["D","Fazer parte de algo maior — uma missão ou propósito"],
+        ["E","Ter autonomia e liberdade para decidir como trabalhar"],
+        ["F","Ganhar bem e ter estabilidade financeira"],
+      ]},
+      {key:"mc2", q:"Em qual área você tem mais interesse em se desenvolver nos próximos 12 meses?", opts:[
+        ["A","Técnicas avançadas de vendas e negociação"],
+        ["B","Gestão emocional e comunicação interpessoal"],
+        ["C","Liderança e desenvolvimento de equipes"],
+        ["D","Conhecimento técnico sobre o produto/serviço"],
+        ["E","Gestão de tempo, produtividade e organização"],
+        ["F","Estratégia comercial e inteligência de mercado"],
+      ]},
+    ],
+  },
+];
+
+/* ========================== RENDER ================================= */
+const state = {};           // key -> value
+const fieldMeta = [];       // {key,label} em ordem, p/ planilha
+const requiredKeys = [];    // chaves obrigatórias
+let totalRequired = 0;
+
+const $ = (s,el=document)=>el.querySelector(s);
+const el = (t,c)=>{const e=document.createElement(t);if(c)e.className=c;return e;};
+const esc = s => String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+const roman = n => ["I","II","III","IV","V","VI","VII","VIII"][n]||(n+1);
+
+// ----- identification -----
+const idgrid = $("#idgrid");
+IDENT.forEach(f=>{
+  fieldMeta.push({key:f.key,label:f.label});
+  requiredKeys.push(f.key); totalRequired++;
+  const wrap = el("div","field"+(f.full?" full":""));
+  wrap.innerHTML = `<label for="${f.key}">${esc(f.label)}</label>
+    <input id="${f.key}" type="${f.type||"text"}" placeholder="${esc(f.ph||"")}" data-req="${f.key}" autocomplete="off"/>`;
+  idgrid.appendChild(wrap);
+  $("input",wrap).addEventListener("input",e=>{ setVal(f.key,e.target.value.trim()); });
+});
+
+// ----- sections -----
+const sectionsEl = $("#sections");
+SECTIONS.forEach((sec,si)=>{
+  const node = el("section","section");
+  node.id = "sec-"+si;
+  node.innerHTML = `<div class="section__head">
+      <span class="section__num">${roman(si)}</span>
+      <h2 class="section__title">${esc(sec.title)}</h2>
+    </div>
+    <p class="section__intro">${esc(sec.intro)}</p>`;
+
+  if(sec.type==="likert"){
+    sec.items.forEach((q,qi)=>{
+      const key = `${sec.prefix}_q${qi+1}`;
+      node.appendChild(renderLikert(key, qi+1, q, sec.prefix));
+    });
+    (sec.choices||[]).forEach(ch=>{
+      const key = `${sec.prefix}_${ch.key}`;
+      node.appendChild(renderChoice(key, ch));
+    });
+  }
+
+  if(sec.type==="choices-only"){
+    (sec.choices||[]).forEach(ch=>{
+      const key = `${sec.prefix}_${ch.key}`;
+      node.appendChild(renderChoice(key, ch));
+    });
+  }
+
+  if(sec.type==="forced"){
+    if(sec.groups){
+      sec.groups.forEach((words,gi)=>{
+        node.appendChild(renderForced(`${sec.prefix}_g${gi+1}`, `${sec.label} ${gi+1}`, words, null));
+      });
+    }
+    if(sec.scenarios){
+      sec.scenarios.forEach((sc,ci)=>{
+        node.appendChild(renderForced(`${sec.prefix}_c${ci+1}`, `${sec.label} ${ci+1}`, sc.opts, sc.q));
+      });
+    }
+  }
+
+  sectionsEl.appendChild(node);
+});
+
+function renderLikert(key, num, text, prefix){
+  fieldMeta.push({key,label:`[${prefix.toUpperCase()}] ${text}`});
+  requiredKeys.push(key); totalRequired++;
+  const card = el("div","qcard"); card.dataset.key=key;
+  const head = el("div","qhead");
+  head.innerHTML = `<span class="qnum">${num}</span><div class="qtext">${esc(text)}</div>`;
+  card.appendChild(head);
+  const grp = el("div","likert"); grp.setAttribute("role","radiogroup");
+  ESCALA.forEach(o=>{
+    const lab = el("label","opt");
+    lab.innerHTML = `<input type="radio" name="${key}" value="${o.v}">
+      <span class="val">${o.v}</span><span class="lab">${esc(o.lab)}</span>`;
+    const input = $("input",lab);
+    input.addEventListener("change",()=>{
+      grp.querySelectorAll(".opt").forEach(x=>x.classList.remove("is-on"));
+      lab.classList.add("is-on");
+      setVal(key,o.v); markAnswered(card,true);
+    });
+    grp.appendChild(lab);
+  });
+  card.appendChild(grp);
+  return card;
+}
+
+function renderChoice(key, ch){
+  fieldMeta.push({key,label:ch.q});
+  requiredKeys.push(key); totalRequired++;
+  const card = el("div","qcard"); card.dataset.key=key;
+  card.innerHTML = `<div class="qhead"><div class="qtext">${esc(ch.q)}</div></div>`;
+  const list = el("div","choices"); list.setAttribute("role","radiogroup");
+  ch.opts.forEach(([letter,txt])=>{
+    const lab = el("label","choice");
+    lab.innerHTML = `<input type="radio" name="${key}" value="${letter}">
+      <span class="mark">✓</span><span class="ctext"><b>${letter})</b>${esc(txt)}</span>`;
+    $("input",lab).addEventListener("change",()=>{
+      list.querySelectorAll(".choice").forEach(x=>x.classList.remove("is-on"));
+      lab.classList.add("is-on");
+      setVal(key,letter); markAnswered(card,true);
+    });
+    list.appendChild(lab);
+  });
+  card.appendChild(list);
+  return card;
+}
+
+function renderForced(baseKey, tag, items, scenarioQ){
+  const maisKey = baseKey+"_mais", menosKey = baseKey+"_menos";
+  fieldMeta.push({key:maisKey,label:`${tag} — MAIS`});
+  fieldMeta.push({key:menosKey,label:`${tag} — MENOS`});
+  requiredKeys.push(maisKey,menosKey); totalRequired+=2;
+
+  const card = el("div","qcard"); card.dataset.key=baseKey; card.dataset.mais=maisKey; card.dataset.menos=menosKey;
+  let head = `<div class="grouptag">${esc(tag)}</div>`;
+  if(scenarioQ) head += `<div class="scenario-q">${esc(scenarioQ)}<span>O que eu faria…</span></div>`;
+  card.innerHTML = head;
+
+  const fc = el("div","fc");
+  fc.innerHTML = `<div class="fc__legend"><span></span><span class="h mais">✓ Mais</span><span class="h menos">✗ Menos</span></div>`;
+  items.forEach((w,i)=>{
+    const row = el("div","fcrow");
+    row.innerHTML = `<span class="word">${esc(w)}</span>`;
+    const bM = el("button","fcbtn mais"); bM.type="button"; bM.textContent="✓"; bM.dataset.i=i;
+    const bN = el("button","fcbtn menos"); bN.type="button"; bN.textContent="✗"; bN.dataset.i=i;
+    bM.addEventListener("click",()=>toggleForced(card,fc,maisKey,menosKey,"mais",i,bM));
+    bN.addEventListener("click",()=>toggleForced(card,fc,maisKey,menosKey,"menos",i,bN));
+    row.appendChild(bM); row.appendChild(bN);
+    fc.appendChild(row);
+  });
+  card.appendChild(fc);
+  return card;
+}
+
+function toggleForced(card,fc,maisKey,menosKey,kind,idx,btn){
+  const sel = kind==="mais"?"mais":"menos";
+  const others = fc.querySelectorAll(`.fcbtn.${sel}`);
+  const already = btn.classList.contains("is-on");
+  others.forEach(b=>b.classList.remove("is-on"));
+  if(already){ setVal(kind==="mais"?maisKey:menosKey,""); }
+  else { btn.classList.add("is-on"); setVal(kind==="mais"?maisKey:menosKey,String(idx)); }
+  // impedir mesma linha em MAIS e MENOS
+  const mIdx = state[maisKey], nIdx = state[menosKey];
+  fc.querySelectorAll(".fcbtn").forEach(b=>b.classList.remove("is-disabled"));
+  if(mIdx!=null && mIdx!=="") fc.querySelector(`.fcbtn.menos[data-i="${mIdx}"]`)?.classList.add("is-disabled");
+  if(nIdx!=null && nIdx!=="") fc.querySelector(`.fcbtn.mais[data-i="${nIdx}"]`)?.classList.add("is-disabled");
+  // se conflito (mesma linha), limpa o oposto
+  if(mIdx!=null && mIdx!=="" && mIdx===nIdx){
+    if(kind==="mais"){ setVal(menosKey,""); fc.querySelectorAll(".fcbtn.menos").forEach(b=>b.classList.remove("is-on")); }
+    else { setVal(maisKey,""); fc.querySelectorAll(".fcbtn.mais").forEach(b=>b.classList.remove("is-on")); }
+    fc.querySelectorAll(".fcbtn").forEach(b=>b.classList.remove("is-disabled"));
+    const m2=state[maisKey], n2=state[menosKey];
+    if(m2!=null&&m2!=="") fc.querySelector(`.fcbtn.menos[data-i="${m2}"]`)?.classList.add("is-disabled");
+    if(n2!=null&&n2!=="") fc.querySelector(`.fcbtn.mais[data-i="${n2}"]`)?.classList.add("is-disabled");
+  }
+  const done = state[maisKey]!=null && state[maisKey]!=="" && state[menosKey]!=null && state[menosKey]!=="";
+  markAnswered(card,done);
+}
+
+/* ===================== progresso / estado ========================= */
+function setVal(key,val){
+  if(val==="" || val==null) delete state[key]; else state[key]=val;
+  updateProgress();
+}
+function markAnswered(card,ok){
+  card.classList.toggle("is-answered",ok);
+  if(ok) card.classList.remove("is-error");
+}
+function answeredCount(){
+  return requiredKeys.filter(k=>state[k]!=null && state[k]!=="").length;
+}
+function updateProgress(){
+  const done = answeredCount();
+  const pct = Math.round((done/totalRequired)*100);
+  $("#bar").style.width = pct+"%";
+  $("#count").textContent = pct+"%";
+  document.querySelector(".progress").setAttribute("aria-valuenow",pct);
+}
+
+/* ========================= validação / envio ====================== */
+$("#submit").addEventListener("click",submitForm);
+let firstErrorEl = null;
+
+function validate(){
+  let missing = 0; firstErrorEl=null;
+  // limpa erros
+  document.querySelectorAll(".qcard.is-error").forEach(c=>c.classList.remove("is-error"));
+  // ident
+  IDENT.forEach(f=>{
+    if(!state[f.key]){
+      missing++;
+      const inp = document.getElementById(f.key);
+      inp.style.borderColor = "var(--err)";
+      if(!firstErrorEl) firstErrorEl = inp.closest(".idcard");
+    } else {
+      document.getElementById(f.key).style.borderColor = "";
+    }
+  });
+  // cards
+  document.querySelectorAll(".qcard").forEach(card=>{
+    const k = card.dataset.key;
+    let ok;
+    if(card.dataset.mais){ ok = state[card.dataset.mais] && state[card.dataset.menos]; }
+    else { ok = state[k]!=null && state[k]!==""; }
+    if(!ok){
+      missing++;
+      card.classList.add("is-error");
+      if(!firstErrorEl) firstErrorEl = card;
+    }
+  });
+  return missing;
+}
+
+function submitForm(){
+  const missing = validate();
+  const summary = $("#errsummary");
+  if(missing>0){
+    $("#errcount").textContent = missing===1 ? "1 questão pendente." : `${missing} questões pendentes.`;
+    summary.classList.add("show");
+    $("#gotofirst").onclick = ()=> firstErrorEl?.scrollIntoView({behavior:"smooth",block:"center"});
+    firstErrorEl?.scrollIntoView({behavior:"smooth",block:"center"});
+    return;
+  }
+  summary.classList.remove("show");
+  send();
+}
+
+function buildPayload(){
+  const respostas = {};
+  const labels = {};
+  const ordem = [];
+  fieldMeta.forEach(f=>{
+    ordem.push(f.key);
+    labels[f.key] = f.label;
+    let v = state[f.key] ?? "";
+    // converte índices de escolha forçada em palavra/letra legível
+    respostas[f.key] = v;
+  });
+  return {
+    formulario: "Avaliação de Perfil Comportamental — My Blue",
+    enviado_em: new Date().toISOString(),
+    avaliado: state["nome"] || "",
+    ordem, labels, respostas,
+    legivel: buildReadable(),
+  };
+}
+
+// versão legível (palavras das escolhas forçadas em vez de índices)
+function buildReadable(){
+  const out = {};
+  IDENT.forEach(f=> out[f.label] = state[f.key]||"");
+  SECTIONS.forEach((sec,si)=>{
+    if(sec.type==="likert"){
+      sec.items.forEach((q,qi)=>{
+        const v = state[`${sec.prefix}_q${qi+1}`];
+        out[`[S${si+1}] ${q}`] = v ? ESCALA.find(e=>e.v===v).lab : "";
+      });
+    }
+    if(sec.groups){
+      sec.groups.forEach((words,gi)=>{
+        const b=`${sec.prefix}_g${gi+1}`;
+        out[`${sec.label} ${gi+1} — MAIS`] = words[state[b+"_mais"]] ?? "";
+        out[`${sec.label} ${gi+1} — MENOS`] = words[state[b+"_menos"]] ?? "";
+      });
+    }
+    if(sec.scenarios){
+      sec.scenarios.forEach((sc,ci)=>{
+        const b=`${sec.prefix}_c${ci+1}`;
+        out[`${sec.label} ${ci+1} — MAIS`] = sc.opts[state[b+"_mais"]] ?? "";
+        out[`${sec.label} ${ci+1} — MENOS`] = sc.opts[state[b+"_menos"]] ?? "";
+      });
+    }
+    (sec.choices||[]).forEach(ch=>{
+      const v = state[`${sec.prefix}_${ch.key}`];
+      const opt = ch.opts.find(o=>o[0]===v);
+      out[ch.q] = opt ? `${opt[0]}) ${opt[1]}` : "";
+    });
+  });
+  return out;
+}
+
+async function send(){
+  const btn = $("#submit");
+  btn.classList.add("loading"); btn.disabled=true;
+  $(".btn__label",btn).textContent = "Enviando…";
+  const payload = buildPayload();
+
+  // Sem backend configurado → baixa JSON de teste
+  if(!ENDPOINT_URL){
+    const blob = new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `avaliacao_${(state["nome"]||"respondente").replace(/\s+/g,"_")}.json`;
+    a.click();
+    setTimeout(()=>showDone(payload),400);
+    return;
+  }
+
+  try{
+    await fetch(ENDPOINT_URL,{
+      method:"POST",
+      // text/plain evita preflight CORS no Apps Script
+      headers:{"Content-Type":"text/plain;charset=utf-8"},
+      body: JSON.stringify(payload),
+    });
+    showDone(payload);
+  }catch(err){
+    btn.classList.remove("loading"); btn.disabled=false;
+    $(".btn__label",btn).textContent = "Tentar enviar novamente";
+    const summary = $("#errsummary");
+    $("#errcount").textContent = "";
+    summary.querySelector("span").innerHTML = "Não foi possível enviar agora. Verifique sua conexão e toque em enviar novamente.";
+    summary.classList.add("show");
+  }
+}
+
+function showDone(payload){
+  $("#done .name") && ($("#doneName").textContent = payload.avaliado ? `, ${payload.avaliado.split(" ")[0]}` : "");
+  $("#form").style.display="none";
+  document.querySelector(".progress").style.display="none";
+  $("#done").classList.add("show");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+updateProgress();
+</script>
+</body>
+</html>
