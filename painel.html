@@ -49,13 +49,82 @@
   .drop svg{margin-bottom:14px;}
   .drop b{display:block;font-size:16px;color:var(--ink);margin-bottom:5px;}
   .drop span{font-size:13.5px;color:var(--muted-2);}
-  .picker{max-width:540px;margin:0 auto 6px;}
-  .picker__status{font-size:14px;color:var(--muted);padding:10px 0;}
-  .picker__status.err{color:var(--d);}
-  .picker__row{display:flex;gap:9px;align-items:stretch;justify-content:center;}
-  .select{flex:1;font:inherit;font-size:15px;color:var(--ink);padding:12px 13px;border:1px solid var(--line-strong);border-radius:11px;background:#fff;cursor:pointer;}
+  /* navegação */
+  .nav{position:sticky;top:0;z-index:40;background:var(--petrol-900);}
+  .nav__in{max-width:var(--maxw);margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:18px;height:60px;}
+  .nav .brand{color:#fff;} .nav .brand b{color:var(--accent);} .nav .brand span{color:#9DB3B5;}
+  .tabs{display:flex;gap:4px;margin-left:auto;}
+  .tab{font:inherit;font-size:14px;font-weight:600;color:#AFC2C4;background:none;border:none;cursor:pointer;padding:9px 16px;border-radius:9px;transition:.12s;}
+  .tab:hover{color:#fff;background:rgba(255,255,255,.06);}
+  .tab.is-on{color:#fff;background:var(--petrol);}
+  .pdfbtn{margin-left:10px;}
+  @media (max-width:600px){
+    .nav__in{flex-wrap:wrap;height:auto;padding:10px 16px;gap:10px;}
+    .tabs{margin-left:0;width:100%;} .tab{flex:1;text-align:center;padding:9px 8px;}
+    .brand span{display:none;}
+  }
+
+  /* carregamento */
+  .boot{padding:90px 0;text-align:center;}
+  .boot__spin{width:34px;height:34px;border:3px solid var(--line);border-top-color:var(--accent);border-radius:50%;margin:0 auto 18px;animation:spin .8s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .boot__txt{font-size:15px;color:var(--muted);} .boot__txt.err{color:var(--d);}
+  .boot__fallback{margin-top:24px;}
+
+  /* dashboard */
+  .dash__hero{padding:34px 0 22px;}
+  .dash__hero .eyebrow{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+  .dash__hero h1{font-family:"Fraunces",serif;font-weight:600;font-size:clamp(28px,5vw,38px);margin:0 0 8px;line-height:1.1;}
+  .dash__hero h1 em{font-style:italic;color:var(--petrol);}
+  .dash__hero p{color:var(--muted);font-size:15.5px;margin:0;}
+  .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:8px;}
+  @media (max-width:600px){.stats{grid-template-columns:1fr;}}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;}
+  .stat__lbl{font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-2);margin-bottom:6px;}
+  .stat__val{font-family:"Fraunces",serif;font-weight:700;font-size:30px;color:var(--petrol-700);line-height:1.1;}
+  .stat__val small{font-size:14px;color:var(--muted-2);font-weight:400;font-family:"Inter",sans-serif;}
+  .cta{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:14px;}
+  @media (max-width:600px){.cta{grid-template-columns:1fr;}}
+  .ctabtn{display:flex;align-items:center;justify-content:space-between;gap:12px;background:var(--petrol);color:#fff;border:none;cursor:pointer;border-radius:var(--radius);padding:18px 22px;font:inherit;font-size:16px;font-weight:600;box-shadow:0 8px 22px rgba(32,80,92,.18);transition:.12s;}
+  .ctabtn:hover{background:var(--petrol-700);} .ctabtn span.arr{font-size:20px;}
+  .ctabtn.alt{background:var(--surface);color:var(--petrol-700);border:1px solid var(--line-strong);box-shadow:var(--shadow);}
+  .ctabtn.alt:hover{border-color:var(--petrol);}
+
+  /* DISC team + gauges + roster (compartilhado com equipe) */
+  .discteam{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;}
+  @media (max-width:640px){.discteam{grid-template-columns:1fr 1fr;}}
+  .dt{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 14px;text-align:center;}
+  .dt__L{font-family:"Fraunces",serif;font-weight:700;font-size:28px;line-height:1;color:#fff;width:44px;height:44px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin:0 auto 9px;}
+  .dt__n{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);}
+  .dt__count{font-family:"Fraunces",serif;font-weight:700;font-size:26px;color:var(--ink);margin-top:5px;}
+  .dt__count small{font-size:12px;color:var(--muted-2);font-weight:400;font-family:"Inter",sans-serif;}
+  .cards2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:640px){.cards2{grid-template-columns:1fr;}}
+  .panelc{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 20px;}
+  .panelc h4{margin:0 0 12px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--petrol);}
+  .hl{display:flex;justify-content:space-between;align-items:baseline;padding:7px 0;border-top:1px solid var(--line);font-size:14px;}
+  .hl:first-of-type{border-top:none;} .hl b{font-weight:600;} .hl .v{font-weight:700;font-variant-numeric:tabular-nums;color:var(--petrol-700);}
+  .gap{background:var(--petrol-900);color:#EAF1F1;border-radius:var(--radius);box-shadow:var(--shadow-lg);padding:18px 22px;}
+  .gap h4{margin:0 0 8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);}
+  .gap p{margin:0;font-size:14px;line-height:1.55;color:#DCE7E7;} .gap b{color:#fff;}
+  .mot{display:grid;gap:9px;}
+  .motrow{display:grid;grid-template-columns:200px 1fr 34px;gap:10px;align-items:center;font-size:13.5px;}
+  @media (max-width:560px){.motrow{grid-template-columns:130px 1fr 30px;}}
+  .motrow .bar{height:10px;border-radius:99px;background:var(--accent);min-width:3px;}
+  .motrow .bart{background:var(--mist);border-radius:99px;overflow:hidden;}
+  .motrow .num{text-align:right;font-weight:700;color:var(--muted);font-variant-numeric:tabular-nums;}
+  table.roster{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:4px;}
+  table.roster th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted-2);padding:9px 10px;border-bottom:2px solid var(--line-strong);}
+  table.roster td{padding:10px;border-bottom:1px solid var(--line);}
+  table.roster tr:last-child td{border-bottom:none;} table.roster .nm{font-weight:600;}
+  .pill{display:inline-block;font-weight:700;font-size:12px;padding:2px 9px;border-radius:99px;color:#fff;}
+
+  /* picker individual */
+  .picker{display:flex;gap:9px;align-items:center;margin:26px 0 4px;}
+  .picker__lbl{font-size:13px;font-weight:700;color:var(--muted);}
+  .select{flex:1;max-width:380px;font:inherit;font-size:15px;color:var(--ink);padding:11px 13px;border:1px solid var(--line-strong);border-radius:11px;background:#fff;cursor:pointer;}
   .select:focus{outline:none;border-color:var(--petrol);box-shadow:0 0 0 3px rgba(32,80,92,.12);}
-  .or{max-width:540px;margin:22px auto 16px;text-align:center;font-size:12.5px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.1em;position:relative;}
+  .or{max-width:520px;margin:22px auto 16px;text-align:center;font-size:12.5px;color:var(--muted-2);text-transform:uppercase;letter-spacing:.1em;position:relative;}
   .or::before,.or::after{content:"";position:absolute;top:50%;width:32%;height:1px;background:var(--line);}
   .or::before{left:0;} .or::after{right:0;}
   .paste-toggle{margin-top:20px;font-size:13.5px;color:var(--petrol);text-decoration:underline;cursor:pointer;background:none;border:none;font-family:inherit;}
@@ -129,7 +198,10 @@
   .note b{color:var(--muted);font-weight:600;}
 
   /* diagnóstico + PDI */
-  .verdito{display:flex;gap:20px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;margin-bottom:18px;}
+  .resumo{margin-top:20px;background:linear-gradient(180deg,#FCFAF6,#fff);border:1px solid var(--line);border-left:4px solid var(--petrol);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px 20px;}
+  .resumo__tag{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--petrol);margin-bottom:6px;}
+  .resumo__tx{font-size:15px;line-height:1.55;color:var(--ink);margin:0;}
+  .resumo__tx b{color:var(--petrol-700);font-weight:600;}display:flex;gap:20px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;margin-bottom:18px;}
   .verdito__l{text-align:center;flex:none;padding-right:20px;border-right:1px solid var(--line);}
   .verdito__lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);}
   .verdito__num{font-family:"Fraunces",serif;font-weight:700;font-size:40px;line-height:1.1;font-variant-numeric:tabular-nums;}
@@ -168,7 +240,7 @@
     @page{ margin:1.2cm; }
     *{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
     html,body{ background:#fff !important; }
-    .topbar,.note{display:none;}
+    .topbar,.note,.nav,.picker,footer{display:none !important;}
     .wrap{padding:0;max-width:100%;}
     .disc__profile,.disc__chart,.gauge,.qcell{box-shadow:none;break-inside:avoid;}
     .block{break-inside:avoid;}
@@ -179,48 +251,51 @@
 </head>
 <body>
 
-<div class="topbar">
-  <div class="topbar__in">
-    <span class="brand">WS<b>·</b>Consultoria <span>Leitura Individual</span></span>
-    <div class="topbar__actions" id="actions" style="display:none">
-      <button class="tbtn" id="another">Outra avaliação</button>
-      <button class="tbtn primary" id="print">Salvar PDF</button>
-    </div>
+<div class="nav">
+  <div class="nav__in">
+    <span class="brand">WS<b>·</b>Consultoria <span>Plataforma de Avaliação</span></span>
+    <nav class="tabs" id="tabs">
+      <button class="tab is-on" data-view="inicio">Início</button>
+      <button class="tab" data-view="individual">Individual</button>
+      <button class="tab" data-view="equipe">Equipe</button>
+    </nav>
+    <button class="tbtn primary pdfbtn" id="print" style="display:none">Salvar PDF</button>
   </div>
 </div>
 
 <main class="wrap">
 
-  <section class="loader" id="loader">
-    <h1>Painel de <em>Leitura Individual</em></h1>
-    <p>Escolha um avaliado para gerar o perfil comportamental DISC, os índices de competência e a leitura qualitativa — pronto para o Plano de Desenvolvimento Individual.</p>
-
-    <div class="picker" id="picker">
-      <div class="picker__status" id="pickStatus">Buscando avaliados na planilha…</div>
-      <div class="picker__row" id="pickRow" style="display:none">
-        <select id="pickSelect" class="select"></select>
-        <button class="tbtn primary" id="pickLoad">Gerar leitura</button>
-        <button class="tbtn" id="pickRefresh" title="Atualizar lista">&#8635;</button>
+  <!-- carregamento inicial -->
+  <section class="boot" id="boot">
+    <div class="boot__spin"></div>
+    <div class="boot__txt" id="bootTxt">Carregando avaliações da planilha…</div>
+    <div class="boot__fallback" id="bootFallback" style="display:none">
+      <div class="or">ou carregue os arquivos manualmente</div>
+      <div class="drop" id="drop">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none"><path d="M12 15V4m0 0L8 8m4-4l4 4" stroke="#C98A3C" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 16v2a2 2 0 002 2h10a2 2 0 002-2v-2" stroke="#20505C" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <b>Arraste os .json dos avaliados</b><span>pode soltar vários de uma vez</span>
+        <input type="file" id="file" accept="application/json,.json" multiple hidden />
       </div>
     </div>
-
-    <div class="or" id="orDiv">ou carregue um arquivo</div>
-
-    <div class="drop" id="drop">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none"><path d="M12 15V4m0 0L8 8m4-4l4 4" stroke="#C98A3C" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 16v2a2 2 0 002 2h10a2 2 0 002-2v-2" stroke="#20505C" stroke-width="1.7" stroke-linecap="round"/></svg>
-      <b>Arraste o arquivo .json aqui</b>
-      <span>ou toque para selecionar</span>
-      <input type="file" id="file" accept="application/json,.json" hidden />
-    </div>
-    <button class="paste-toggle" id="pasteToggle">ou colar o conteúdo manualmente</button>
-    <div class="pastebox" id="pastebox">
-      <textarea id="pastearea" placeholder='Cole aqui o JSON da avaliação…'></textarea>
-      <button class="tbtn primary" id="pasteLoad" style="margin-top:10px">Gerar leitura</button>
-    </div>
-    <p class="err" id="err"></p>
   </section>
 
-  <section class="report" id="report"></section>
+  <!-- INÍCIO -->
+  <section class="view" id="view-inicio"></section>
+
+  <!-- INDIVIDUAL -->
+  <section class="view" id="view-individual" style="display:none">
+    <div class="picker">
+      <span class="picker__lbl">Avaliado:</span>
+      <select id="pickSelect" class="select"></select>
+      <button class="tbtn" id="pickRefresh" title="Atualizar lista">&#8635;</button>
+    </div>
+    <div id="ind-report"></div>
+  </section>
+
+  <!-- EQUIPE -->
+  <section class="view" id="view-equipe" style="display:none">
+    <div id="eq-report"></div>
+  </section>
 
   <footer>WS Gestão, Consultoria e Treinamentos LTDA — leitura confidencial para fins de desenvolvimento profissional.</footer>
 </main>
@@ -359,6 +434,12 @@ const DISC_ACAO = {
   C:"Acelerar a tomada de decisão mesmo sem informação completa e ganhar flexibilidade diante de imprevistos.",
 };
 const DISC_NOME = {D:"Dominância",I:"Influência",S:"Estabilidade",C:"Conformidade"};
+const FORCA_ACAO = {
+  s1:"tornar-se referência e multiplicador dos valores da empresa, ajudando a disseminar a cultura no time.",
+  s3:"atuar como ponto de equilíbrio em momentos de tensão e apoiar colegas na gestão emocional.",
+  s4:"assumir contas estratégicas e mentorar novos vendedores, transformando a força comercial em resultado coletivo.",
+  s5:"assumir frentes de coordenação e projetos que exijam influência e visão de conjunto.",
+};
 
 function fitVerdito(p){
   if(p>=75) return {t:"Alta aderência", d:"Perfil alinhado à cultura e ao comportamento esperado. Recomendação: investir no desenvolvimento e na retenção, posicionando a pessoa onde seus pontos fortes rendem mais.", cor:"#2F7D5B"};
@@ -432,7 +513,7 @@ function diagnosticoHTML(c, nome){
 
   if(fortes.length){
     h += `<div class="pdi__sec"><div class="pdi__st">Forças a potencializar</div><ul class="pdi__ul forte">`;
-    fortes.forEach(a=> h += `<li><b>${esc(a.nome)} (${a.pct}%)</b> — alavancar esse ponto forte em desafios e responsabilidades à altura.</li>`);
+    fortes.forEach(a=> h += `<li><b>${esc(a.nome)} (${a.pct}%)</b> — ${esc(FORCA_ACAO[a.k]||"alavancar esse ponto forte em desafios à altura.")}</li>`);
     h += `</ul></div>`;
   }
 
@@ -469,8 +550,8 @@ function diagCard(titulo, comp, texto){
   </div>`;
 }
 
-/* ====================== RENDER ====================== */
-function render(d){
+/* ====================== RENDER INDIVIDUAL ====================== */
+function renderIndividual(d){
   const c = computar(d);
   const id = (k)=> (d.respostas&&d.respostas[k]) || "";
   const nome = d.avaliado || id("nome") || "Avaliado";
@@ -492,10 +573,13 @@ function render(d){
         ${cargo?`<span><b>Cargo:</b> ${esc(cargo)}</span>`:""}
         ${cidade?`<span><b>Unidade:</b> ${esc(cidade)}</span>`:""}
         ${tempo?`<span><b>Empresa:</b> ${esc(tempo)}</span>`:""}
-        ${data?`<span><b>Aplicação:</b> ${esc(data)}</span>`:""}
+        ${data?`<span><b>Aplicação:</b> ${esc(fmtData(data))}</span>`:""}
       </div>
     </div>
   </div>`;
+
+  // Resumo executivo (síntese no topo)
+  h += resumoExecutivoHTML(c, nome, leg);
 
   // DISC
   h += `<div class="block">
@@ -557,89 +641,209 @@ function render(d){
     <span><b>Como ler.</b> Este diagnóstico parte da autopercepção do avaliado e serve como apoio à decisão — não como veredito. Ele deve ser validado e aprofundado em uma conversa de devolutiva antes de qualquer encaminhamento sobre a pessoa.</span>
   </div>`;
 
-  document.getElementById("report").innerHTML = h;
-  document.getElementById("loader").style.display="none";
-  document.getElementById("report").classList.add("show");
-  document.getElementById("actions").style.display="flex";
-  window.scrollTo({top:0,behavior:"smooth"});
+  document.getElementById("ind-report").innerHTML = h;
+  document.getElementById("print").style.display = "inline-flex";
 }
 
 const esc = s => String(s).replace(/[&<>"]/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
 
-/* ====================== CARREGAR ====================== */
-function carregar(text){
-  const err = document.getElementById("err"); err.classList.remove("show");
-  let d;
-  try{ d = JSON.parse(text); }catch(e){ return fail("Não consegui ler o arquivo — confira se é o .json gerado pela avaliação."); }
-  if(!d || !d.respostas) return fail("Esse arquivo não parece uma avaliação válida (faltam as respostas).");
-  try{ render(d); }catch(e){ fail("Tive um problema ao montar a leitura: "+e.message); }
-}
-function fail(msg){
-  const err = document.getElementById("err"); err.textContent = msg; err.classList.add("show");
+function fmtData(s){
+  if(!s) return "";
+  const m = String(s).match(/^(\d{4})-(\d{2})-(\d{2})/);
+  return m ? `${m[3]}/${m[2]}/${m[1]}` : String(s);
 }
 
-const drop = document.getElementById("drop");
-const file = document.getElementById("file");
-drop.addEventListener("click",()=>file.click());
-file.addEventListener("change",e=>{ const f=e.target.files[0]; if(f) readFile(f); });
-["dragover","dragenter"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over");}));
-["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over");}));
-drop.addEventListener("drop",e=>{ const f=e.dataTransfer.files[0]; if(f) readFile(f); });
-function readFile(f){ const rd=new FileReader(); rd.onload=()=>carregar(rd.result); rd.readAsText(f); }
+function resumoExecutivoHTML(c, nome, leg){
+  const prim = c.ranked[0], sec = c.ranked[1];
+  const primeiro = (nome||"O avaliado").split(" ")[0];
+  const areas = [{n:"alinhamento cultural",p:c.compBy.s1.pct},{n:"inteligência emocional",p:c.compBy.s3.pct},{n:"competências comerciais",p:c.compBy.s4.pct},{n:"potencial de liderança",p:c.compBy.s5.pct}];
+  const forte = [...areas].sort((a,b)=>b.p-a.p)[0];
+  const fraco = [...areas].sort((a,b)=>a.p-b.p)[0];
+  const ader = Math.round(c.compBy.s1.pct*0.6 + c.compBy.s3.pct*0.4);
+  const v = fitVerdito(ader);
+  const tempo = leg["Tempo de empresa"] ? ` Com ${esc(leg["Tempo de empresa"])} de casa,` : "";
+  const txt = `<b>${esc(primeiro)}</b> tem perfil comportamental predominante <b>${prim} — ${DISC_NOME[prim]}</b>, com traço secundário <b>${sec} — ${DISC_NOME[sec]}</b>.${tempo} se destaca em <b>${forte.n} (${forte.p}%)</b> e tem em <b>${fraco.n} (${fraco.p}%)</b> sua principal frente de desenvolvimento. O índice de aderência é de <b style="color:${v.cor}">${ader}% — ${v.t.toLowerCase()}</b>.`;
+  return `<div class="resumo">
+    <div class="resumo__tag">Síntese</div>
+    <p class="resumo__tx">${txt}</p>
+  </div>`;
+}
 
-document.getElementById("pasteToggle").addEventListener("click",()=>document.getElementById("pastebox").classList.toggle("show"));
-document.getElementById("pasteLoad").addEventListener("click",()=>{ const t=document.getElementById("pastearea").value.trim(); if(t) carregar(t); });
+/* ====================== EQUIPE + DASHBOARD ====================== */
+const MOTIV={A:"Atingir e superar metas",B:"Reconhecimento",C:"Crescer na carreira",D:"Missão / propósito",E:"Autonomia",F:"Estabilidade financeira"};
 
+function metricasPessoa(d){
+  const c = computar(d);
+  return {dom:c.ranked[0], sec:c.ranked[1],
+    s1:c.compBy.s1.pct, s3:c.compBy.s3.pct, s4:c.compBy.s4.pct, s5:c.compBy.s5.pct,
+    ader:Math.round(c.compBy.s1.pct*0.6 + c.compBy.s3.pct*0.4),
+    mot:(d.respostas&&d.respostas.s6_mc1)||""};
+}
+function aggregarTime(){
+  const list = PESSOAS.filter(p=>p.dados&&p.dados.respostas)
+    .map(p=>({nome:p.avaliado||"—", ...metricasPessoa(p.dados)}));
+  const N = list.length || 1;
+  const discCount={D:0,I:0,S:0,C:0}; list.forEach(p=>discCount[p.dom]++);
+  const keys=["s1","s3","s4","s5"];
+  const nomes={s1:"Alinhamento Cultural",s3:"Inteligência Emocional",s4:"Competências Comerciais",s5:"Potencial de Liderança"};
+  const avg={}; keys.forEach(k=> avg[k]=Math.round(list.reduce((a,p)=>a+p[k],0)/N));
+  const top={}; keys.forEach(k=> top[k]=list.reduce((b,p)=> p[k]>b[k]?p:b, list[0]||{nome:"—",[k]:0}));
+  const aderAvg=Math.round(list.reduce((a,p)=>a+p.ader,0)/N);
+  const gapKey=keys.slice().sort((a,b)=>avg[a]-avg[b])[0];
+  const forteKey=keys.slice().sort((a,b)=>avg[b]-avg[a])[0];
+  const domTeam=["D","I","S","C"].sort((a,b)=>discCount[b]-discCount[a])[0];
+  const motCount={}; Object.keys(MOTIV).forEach(k=>motCount[k]=0); list.forEach(p=>{if(p.mot&&motCount[p.mot]!=null)motCount[p.mot]++;});
+  return {list,N:list.length,discCount,avg,top,aderAvg,gapKey,forteKey,domTeam,motCount,nomes,keys};
+}
+
+function renderDashboard(){
+  if(!PESSOAS.length){ document.getElementById("view-inicio").innerHTML = vazio(); return; }
+  const A = aggregarTime();
+  const leituraTime={D:"orientado a resultado e ação",I:"comunicativo e engajador",S:"relacional e estável",C:"analítico e criterioso"}[A.domTeam];
+  let h = `<div class="dash__hero">
+    <span class="eyebrow">My Blue · WS Consultoria</span>
+    <h1>Plataforma de <em>Avaliação Comportamental</em></h1>
+    <p>Visão consolidada de ${A.N} ${A.N===1?"avaliado":"avaliados"} — perfil do time, forças e prioridades de desenvolvimento.</p>
+  </div>`;
+
+  h += `<div class="stats">
+    <div class="stat"><div class="stat__lbl">Avaliados</div><div class="stat__val">${A.N}</div></div>
+    <div class="stat"><div class="stat__lbl">Perfil do time</div><div class="stat__val">${A.domTeam} <small>${DIM[A.domTeam].nome} · ${leituraTime}</small></div></div>
+    <div class="stat"><div class="stat__lbl">Aderência média</div><div class="stat__val">${A.aderAvg}%</div></div>
+  </div>`;
+
+  h += `<div class="block"><div class="block__title"><h3>Mapa DISC do time</h3></div><div class="discteam">`;
+  ["D","I","S","C"].forEach(k=> h += `<div class="dt"><div class="dt__L" style="background:${DIM[k].cor}">${k}</div><div class="dt__n">${DIM[k].nome}</div><div class="dt__count">${A.discCount[k]}<small>/${A.N}</small></div></div>`);
+  h += `</div></div>`;
+
+  h += `<div class="block"><div class="block__title"><h3>Competências — média do time</h3></div><div class="gauges">`;
+  A.keys.forEach(k=>{const p=A.avg[k],b=banda(p);
+    h += `<div class="gauge"><div class="gauge__top"><span class="gauge__name">${esc(A.nomes[k])}</span><span class="gauge__pct">${p}%</span></div><div class="gauge__track"><div class="gauge__fill" style="width:${p}%"></div></div><span class="gauge__band" style="color:${b.cor}"><span class="dotb" style="background:${b.cor}"></span>${b.label}</span></div>`;});
+  h += `</div></div>`;
+
+  h += `<div class="cta">
+    <button class="ctabtn" data-go="individual">Ver relatório individual <span class="arr">→</span></button>
+    <button class="ctabtn alt" data-go="equipe">Ver diagnóstico de equipe <span class="arr">→</span></button>
+  </div>`;
+
+  document.getElementById("view-inicio").innerHTML = h;
+  document.querySelectorAll("[data-go]").forEach(b=> b.addEventListener("click",()=>trocarAba(b.dataset.go)));
+}
+
+function renderEquipe(){
+  if(!PESSOAS.length){ document.getElementById("eq-report").innerHTML = vazio(); return; }
+  const A = aggregarTime();
+  const motMax=Math.max(1,...Object.values(A.motCount));
+  let h = `<div class="rhead" style="border-bottom:2px solid var(--petrol-900);padding-bottom:18px;margin:26px 0 8px"><div class="eyebrow" style="font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Diagnóstico de Equipe · My Blue</div><h2 style="font-family:'Fraunces',serif;font-weight:600;font-size:28px;margin:0">Visão do Time</h2><div style="font-size:14px;color:var(--muted);margin-top:4px">${A.N} ${A.N===1?"avaliado":"avaliados"} · ${new Date().toLocaleDateString("pt-BR")}</div></div>`;
+
+  const leituraTime={D:"orientado a resultado e ação rápida — entrega forte, mas precisa cuidar de relacionamento e processos",I:"comunicativo e energético — bom em engajar e prospectar, com atenção a disciplina e detalhes",S:"relacional e estável — excelente em confiança e fidelização, com atenção a velocidade e a posições mais incisivas",C:"analítico e criterioso — forte em qualidade e estrutura, com atenção a agilidade de decisão"}[A.domTeam];
+  h += `<div class="resumo"><div class="resumo__tag">Síntese do time</div><p class="resumo__tx">O time tem tendência predominante <b>${A.domTeam} — ${DIM[A.domTeam].nome}</b>: ${leituraTime}. A aderência média é de <b>${A.aderAvg}%</b>, com força coletiva em <b>${esc(A.nomes[A.forteKey])}</b> e maior oportunidade de desenvolvimento em <b>${esc(A.nomes[A.gapKey])}</b>.</p></div>`;
+
+  h += `<div class="block"><div class="block__title"><h3>Mapa DISC do Time</h3><span class="tag">perfil dominante de cada pessoa</span></div><div class="discteam">`;
+  ["D","I","S","C"].forEach(k=> h += `<div class="dt"><div class="dt__L" style="background:${DIM[k].cor}">${k}</div><div class="dt__n">${DIM[k].nome}</div><div class="dt__count">${A.discCount[k]}<small>/${A.N}</small></div></div>`);
+  h += `</div></div>`;
+
+  h += `<div class="block"><div class="block__title"><h3>Competências — média do time</h3><span class="tag">escala 1–4 normalizada</span></div><div class="gauges">`;
+  A.keys.forEach(k=>{const p=A.avg[k],b=banda(p);
+    h += `<div class="gauge"><div class="gauge__top"><span class="gauge__name">${esc(A.nomes[k])}</span><span class="gauge__pct">${p}%</span></div><div class="gauge__track"><div class="gauge__fill" style="width:${p}%"></div></div><span class="gauge__band" style="color:${b.cor}"><span class="dotb" style="background:${b.cor}"></span>${b.label}</span></div>`;});
+  h += `</div></div>`;
+
+  h += `<div class="block"><div class="block__title"><h3>Destaques e Prioridade</h3><span class="tag">quem puxa, onde investir</span></div><div class="cards2">`;
+  h += `<div class="panelc"><h4>Referências por competência</h4>`;
+  A.keys.forEach(k=> h += `<div class="hl"><b>${esc(A.nomes[k])}</b><span class="v">${esc(A.top[k].nome.split(" ")[0])} · ${A.top[k][k]}%</span></div>`);
+  h += `</div>`;
+  h += `<div class="gap"><h4>Maior oportunidade do time</h4><p><b>${esc(A.nomes[A.gapKey])}</b> é o eixo com menor média coletiva (<b>${A.avg[A.gapKey]}%</b>). Recomendação: priorizar um treinamento ou trilha de desenvolvimento neste tema — é o ponto de maior retorno para o grupo.</p></div>`;
+  h += `</div></div>`;
+
+  h += `<div class="block"><div class="block__title"><h3>O que move a equipe</h3><span class="tag">motivadores</span></div><div class="mot">`;
+  Object.keys(MOTIV).sort((a,b)=>A.motCount[b]-A.motCount[a]).forEach(k=>{ if(!A.motCount[k]) return;
+    const w=Math.round((A.motCount[k]/motMax)*100);
+    h += `<div class="motrow"><span>${esc(MOTIV[k])}</span><span class="bart"><span class="bar" style="width:${w}%"></span></span><span class="num">${A.motCount[k]}</span></div>`;});
+  h += `</div></div>`;
+
+  const rost=[...A.list].sort((a,b)=>b.ader-a.ader);
+  h += `<div class="block"><div class="block__title"><h3>Quadro Individual</h3><span class="tag">${A.N} pessoas</span></div><div style="overflow-x:auto"><table class="roster"><thead><tr><th>Avaliado</th><th>DISC</th><th>Cultura</th><th>Intel. Emoc.</th><th>Comercial</th><th>Liderança</th><th>Aderência</th></tr></thead><tbody>`;
+  rost.forEach(p=> h += `<tr><td class="nm">${esc(p.nome)}</td><td><span class="pill" style="background:${DIM[p.dom].cor}">${p.dom}</span> <span style="color:var(--muted-2)">/ ${p.sec}</span></td><td class="num">${p.s1}%</td><td class="num">${p.s3}%</td><td class="num">${p.s4}%</td><td class="num">${p.s5}%</td><td class="num" style="font-weight:700;color:${banda(p.ader).cor}">${p.ader}%</td></tr>`);
+  h += `</tbody></table></div></div>`;
+
+  h += `<div class="note"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="9" stroke="#7E8E93" stroke-width="1.5"/><path d="M12 11v5M12 8v.5" stroke="#7E8E93" stroke-width="1.6" stroke-linecap="round"/></svg><span><b>Como ler.</b> As médias refletem a autopercepção do time e orientam decisões coletivas de desenvolvimento — não substituem a leitura individual.</span></div>`;
+
+  document.getElementById("eq-report").innerHTML = h;
+}
+
+function vazio(){
+  return `<div class="boot" style="padding:70px 0"><div class="boot__txt">Nenhuma avaliação na planilha ainda. Assim que alguém enviar o formulário, os dados aparecem aqui.</div></div>`;
+}
+
+/* ====================== ABAS ====================== */
+function trocarAba(view){
+  document.querySelectorAll(".tab").forEach(t=> t.classList.toggle("is-on", t.dataset.view===view));
+  ["inicio","individual","equipe"].forEach(v=> document.getElementById("view-"+v).style.display = (v===view?"block":"none"));
+  // PDF só faz sentido em individual/equipe
+  const showPdf = (view==="individual" && document.getElementById("ind-report").innerHTML) || (view==="equipe" && PESSOAS.length);
+  document.getElementById("print").style.display = showPdf ? "inline-flex" : "none";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+document.querySelectorAll(".tab").forEach(t=> t.addEventListener("click",()=>trocarAba(t.dataset.view)));
 document.getElementById("print").addEventListener("click",()=>window.print());
-document.getElementById("another").addEventListener("click",()=>{
-  document.getElementById("report").classList.remove("show");
-  document.getElementById("report").innerHTML="";
-  document.getElementById("loader").style.display="block";
-  document.getElementById("actions").style.display="none";
-  document.getElementById("pastearea").value="";
-  document.getElementById("err").classList.remove("show");
-  carregarLista();
-});
 
-/* ================= puxar avaliados da planilha ================= */
+/* ====================== CARREGAR DADOS ====================== */
 let PESSOAS = [];
-const pickStatus = document.getElementById("pickStatus");
-const pickRow = document.getElementById("pickRow");
 const pickSelect = document.getElementById("pickSelect");
-const picker = document.getElementById("picker");
-const orDiv = document.getElementById("orDiv");
+const bootTxt = document.getElementById("bootTxt");
 
-async function carregarLista(){
-  if(!ENDPOINT_URL){ picker.style.display="none"; orDiv.style.display="none"; return; }
-  pickStatus.classList.remove("err");
-  pickStatus.textContent = "Buscando avaliados na planilha…";
-  pickRow.style.display = "none";
+function popularTudo(){
+  pickSelect.innerHTML = PESSOAS.map((p,i)=>{
+    const dt = p.data ? ` · ${esc(p.data)}` : "";
+    return `<option value="${i}">${esc(p.avaliado)}${dt}</option>`;
+  }).join("");
+  renderDashboard();
+  renderEquipe();
+  if(PESSOAS.length){ selecionarIndividual(0); }
+  document.getElementById("boot").style.display = "none";
+  document.getElementById("view-inicio").style.display = "block";
+}
+function selecionarIndividual(i){
+  const p = PESSOAS[i];
+  if(p && p.dados){ try{ renderIndividual(p.dados); }catch(e){ document.getElementById("ind-report").innerHTML = `<p style="padding:30px;color:var(--d)">Erro ao montar a leitura: ${esc(e.message)}</p>`; } }
+}
+pickSelect.addEventListener("change",()=>selecionarIndividual(+pickSelect.value));
+document.getElementById("pickRefresh").addEventListener("click",carregar);
+
+async function carregar(){
+  bootTxt.classList.remove("err");
+  bootTxt.textContent = "Carregando avaliações da planilha…";
+  document.getElementById("boot").style.display = "block";
+  ["inicio","individual","equipe"].forEach(v=> document.getElementById("view-"+v).style.display="none");
+  if(!ENDPOINT_URL){ mostrarFallback("Configure o endpoint ou carregue os arquivos."); return; }
   try{
     const res = await fetch(ENDPOINT_URL + "?action=list", {method:"GET"});
     const data = await res.json();
-    PESSOAS = (data && data.pessoas) ? data.pessoas : [];
-    if(!PESSOAS.length){
-      pickStatus.textContent = "Nenhuma resposta na planilha ainda. Assim que alguém enviar, aparece aqui.";
-      return;
-    }
-    pickSelect.innerHTML = PESSOAS.map((p,i)=>{
-      const dt = p.data ? ` · ${esc(p.data)}` : "";
-      return `<option value="${i}">${esc(p.avaliado)}${dt}</option>`;
-    }).join("");
-    pickStatus.textContent = PESSOAS.length===1 ? "1 avaliado disponível:" : `${PESSOAS.length} avaliados disponíveis:`;
-    pickRow.style.display = "flex";
+    PESSOAS = (data && data.pessoas) ? data.pessoas.filter(p=>p.dados&&p.dados.respostas) : [];
+    popularTudo();
   }catch(err){
-    pickStatus.classList.add("err");
-    pickStatus.textContent = "Não consegui acessar a planilha agora — use o arquivo abaixo, ou confira a publicação do Apps Script.";
+    mostrarFallback("Não consegui acessar a planilha — carregue os arquivos abaixo, ou confira a publicação do Apps Script.");
   }
 }
-document.getElementById("pickLoad").addEventListener("click",()=>{
-  const p = PESSOAS[+pickSelect.value];
-  if(p && p.dados) carregar(JSON.stringify(p.dados));
-});
-document.getElementById("pickRefresh").addEventListener("click",carregarLista);
+function mostrarFallback(msg){
+  bootTxt.classList.add("err"); bootTxt.textContent = msg;
+  document.getElementById("bootFallback").style.display = "block";
+}
 
-carregarLista();
+/* upload múltiplo (fallback) */
+const drop = document.getElementById("drop"), file = document.getElementById("file");
+drop.addEventListener("click",()=>file.click());
+["dragover","dragenter"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over");}));
+["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over");}));
+drop.addEventListener("drop",e=>{e.preventDefault();lerArquivos(e.dataTransfer.files);});
+file.addEventListener("change",e=>lerArquivos(e.target.files));
+function lerArquivos(files){
+  const arr=[...files]; let pend=arr.length; const acc=[];
+  if(!pend) return;
+  arr.forEach(f=>{const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);if(d.respostas)acc.push({avaliado:d.avaliado||"—",dados:d});}catch(_){}if(--pend===0){ if(acc.length){ PESSOAS=acc; popularTudo(); } else { bootTxt.textContent="Não consegui ler esses arquivos."; } }};rd.readAsText(f);});
+}
+
+carregar();
 </script>
 </body>
 </html>
