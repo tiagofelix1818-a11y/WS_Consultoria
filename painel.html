@@ -15,6 +15,7 @@
     --muted:#5E7077; --muted-2:#7E8E93;
     --d:#C0492F; --i:#D9A227; --s:#2F7D5B; --c:#2E6E8E;
     --radius:14px; --shadow:0 1px 2px rgba(20,34,42,.04),0 8px 28px rgba(20,34,42,.06);
+    --shadow-lg:0 14px 50px rgba(16,40,47,.28);
     --maxw:880px;
   }
   *{box-sizing:border-box;}
@@ -126,6 +127,40 @@
 
   .note{margin-top:34px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 17px;font-size:12.5px;color:var(--muted-2);display:flex;gap:10px;}
   .note b{color:var(--muted);font-weight:600;}
+
+  /* diagnóstico + PDI */
+  .verdito{display:flex;gap:20px;align-items:center;background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px 22px;margin-bottom:18px;}
+  .verdito__l{text-align:center;flex:none;padding-right:20px;border-right:1px solid var(--line);}
+  .verdito__lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);}
+  .verdito__num{font-family:"Fraunces",serif;font-weight:700;font-size:40px;line-height:1.1;font-variant-numeric:tabular-nums;}
+  .verdito__t{font-family:"Fraunces",serif;font-weight:600;font-size:19px;margin-bottom:4px;}
+  .verdito__d{font-size:13.5px;color:var(--muted);}
+  @media (max-width:600px){.verdito{flex-direction:column;gap:12px;text-align:center;}.verdito__l{border-right:none;border-bottom:1px solid var(--line);padding:0 0 12px;}}
+
+  .diag__grid{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:22px;}
+  @media (max-width:680px){.diag__grid{grid-template-columns:1fr;}}
+  .diag__card{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:15px 17px;}
+  .diag__card:first-child{grid-column:1/-1;}
+  .diag__ct{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;}
+  .diag__ct span:first-child{font-size:14px;font-weight:700;color:var(--petrol-700);}
+  .diag__pct{font-family:"Fraunces",serif;font-weight:700;font-size:18px;font-variant-numeric:tabular-nums;}
+  .diag__tx{font-size:13.5px;color:var(--ink);line-height:1.5;margin:0;}
+  .diag__tx b{color:var(--petrol-700);font-weight:600;}
+
+  .pdi{background:var(--petrol-900);border-radius:var(--radius);padding:6px 22px 22px;color:#EAF1F1;box-shadow:var(--shadow-lg);}
+  .pdi__head{font-family:"Fraunces",serif;font-weight:600;font-size:20px;color:#fff;padding:18px 0 14px;border-bottom:1px solid rgba(255,255,255,.12);margin-bottom:16px;}
+  .pdi__sec{margin-bottom:18px;}
+  .pdi__sec:last-child{margin-bottom:0;}
+  .pdi__st{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:9px;}
+  .pdi__ul{margin:0;padding-left:18px;display:grid;gap:7px;}
+  .pdi__ul li{font-size:13.5px;line-height:1.5;color:#DCE7E7;}
+  .pdi__ul li b{color:#fff;font-weight:600;}
+  .pdi__ul.forte li{color:#CFE7DA;}
+  .pdi__area{background:rgba(255,255,255,.05);border-radius:10px;padding:12px 14px;margin-bottom:9px;}
+  .pdi__atop{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px;}
+  .pdi__atop span:first-child{font-size:13.5px;font-weight:700;color:#fff;}
+  .pdi__apct{font-size:12px;font-weight:700;font-variant-numeric:tabular-nums;}
+  .pdi__none{font-size:13.5px;color:#DCE7E7;margin:0;}
 
   footer{margin-top:40px;border-top:1px solid var(--line);padding-top:18px;font-size:11.5px;color:var(--muted-2);text-align:center;}
 
@@ -268,14 +303,170 @@ function computar(d){
     const pct = cnt? Math.round(((sum/cnt - 1)/3)*100) : 0; // escala 1-4 → 0-100%
     return {...c, pct, band:banda(pct)};
   });
+  const compBy = {}; comp.forEach(x=> compBy[x.key]=x);
 
-  return {mais,menos,net,ranked,comp};
+  // Distribuição DISC em % (sobre as escolhas "MAIS")
+  const totMais = mais.D+mais.I+mais.S+mais.C || 1;
+  const discPct = {}; ["D","I","S","C"].forEach(k=> discPct[k]=Math.round((mais[k]/totMais)*100));
+
+  // Clusters de cultura (cada um = 3 afirmações da Seção 1)
+  const clusters = CLUSTERS.map(cl=>{
+    let sum=0,cnt=0;
+    cl.qs.forEach(i=>{ const v=r[`s1_q${i}`]; if(v){ sum+=+v; cnt++; } });
+    const pct = cnt? Math.round(((sum/cnt - 1)/3)*100) : 0;
+    return {nome:cl.nome, acao:cl.acao, pct, band:banda(pct)};
+  });
+
+  return {mais,menos,net,ranked,comp,compBy,discPct,clusters};
 }
+
+/* Clusters de valores da Seção 1 (3 afirmações cada) + ação de melhoria */
+const CLUSTERS = [
+  {nome:"Simplicidade e Agilidade", qs:[1,2,3], acao:"buscar soluções mais diretas e eliminar etapas que não agregam valor antes de executar"},
+  {nome:"Integridade e Credibilidade", qs:[4,5,6], acao:"reforçar a coerência entre o que promete e entrega, e a transparência ao lidar com problemas"},
+  {nome:"Foco no Cliente", qs:[7,8,9], acao:"conectar as decisões do dia a dia ao impacto na experiência do cliente final"},
+  {nome:"Pessoas e Clima", qs:[10,11,12], acao:"reconhecer e valorizar colegas de forma ativa, contribuindo para um clima saudável"},
+  {nome:"Eficiência de Recursos", qs:[13,14,15], acao:"avaliar alternativas eficientes antes de solicitar recursos e usar o que há com critério"},
+  {nome:"Dono do Resultado", qs:[16,17,18], acao:"assumir responsabilidade ativa pelo resultado, com disciplina mesmo fora da zona de conforto"},
+  {nome:"Inovação e Adaptação", qs:[19,20,21], acao:"questionar o status quo, propor melhorias e encarar mudanças como oportunidade"},
+];
 function banda(p){
   if(p>=85) return {label:"Excepcional", cor:"#2F7D5B"};
   if(p>=70) return {label:"Forte", cor:"#2E6E8E"};
   if(p>=55) return {label:"Consistente", cor:"#C98A3C"};
   return {label:"Em desenvolvimento", cor:"#C0492F"};
+}
+
+/* ============ DIAGNÓSTICO + PLANO DE DESENVOLVIMENTO ============ */
+const ACOES = {
+  s3:["Praticar a identificação das próprias emoções no momento em que surgem, nomeando o que sente.",
+      "Treinar a pausa antes de reagir em situações de frustração ou conflito.",
+      "Desenvolver escuta ativa e leitura dos sinais emocionais dos colegas.",
+      "Separar a crítica ao trabalho da crítica pessoal ao receber feedback."],
+  s4:["Estruturar uma rotina consistente de prospecção e de follow-up das negociações.",
+      "Treinar o diagnóstico de necessidades e o manejo de objeções sem se sentir atacado.",
+      "Praticar a apresentação de valor sem recorrer ao desconto como primeiro recurso.",
+      "Disciplinar o registro e o acompanhamento ativo de cada oportunidade."],
+  s5:["Assumir pequenas frentes de coordenação para exercitar influência sem depender do cargo.",
+      "Praticar feedbacks construtivos, específicos e no momento certo.",
+      "Desenvolver visão de conjunto, enxergando além das tarefas imediatas.",
+      "Exercitar a delegação e o desenvolvimento das pessoas ao redor."],
+};
+const DISC_ACAO = {
+  D:"Equilibrar a assertividade com escuta ativa e paciência; envolver o time antes de decidir e cuidar do impacto do estilo direto nas relações.",
+  I:"Reforçar disciplina de acompanhamento, organização e atenção aos detalhes — pontos que a empolgação pode deixar passar.",
+  S:"Desenvolver tolerância a mudanças rápidas e disposição para assumir posições mais incisivas quando a situação exigir.",
+  C:"Acelerar a tomada de decisão mesmo sem informação completa e ganhar flexibilidade diante de imprevistos.",
+};
+const DISC_NOME = {D:"Dominância",I:"Influência",S:"Estabilidade",C:"Conformidade"};
+
+function fitVerdito(p){
+  if(p>=75) return {t:"Alta aderência", d:"Perfil alinhado à cultura e ao comportamento esperado. Recomendação: investir no desenvolvimento e na retenção, posicionando a pessoa onde seus pontos fortes rendem mais.", cor:"#2F7D5B"};
+  if(p>=60) return {t:"Aderência sólida", d:"Bom encaixe geral, com pontos específicos a desenvolver. Recomendação: seguir com plano de desenvolvimento direcionado.", cor:"#2E6E8E"};
+  if(p>=45) return {t:"Aderência moderada", d:"Encaixe parcial. Recomendação: desenvolvimento estruturado com acompanhamento próximo e metas claras de evolução em prazo definido.", cor:"#C98A3C"};
+  return {t:"Aderência a aprofundar", d:"Os indicadores sugerem distância entre o perfil atual e o esperado. Recomendação: conversa de devolutiva aprofundada para avaliar fit, expectativas e plano intensivo antes de qualquer encaminhamento.", cor:"#C0492F"};
+}
+
+function diagnosticoHTML(c, nome){
+  const prim = c.ranked[0], sec = c.ranked[1];
+  const primeiro = (nome||"O avaliado").split(" ")[0];
+  const cultura = c.compBy.s1, eq = c.compBy.s3, com = c.compBy.s4, lid = c.compBy.s5;
+  const aderencia = Math.round((cultura.pct*0.6) + (eq.pct*0.4)); // cultura pesa mais
+  const v = fitVerdito(aderencia);
+
+  // clusters culturais ordenados
+  const clOrd = [...c.clusters].sort((a,b)=>b.pct-a.pct);
+  const fortesC = clOrd.filter(x=>x.pct>=70).slice(0,2);                       // claramente fortes
+  const fracosNarr = [...c.clusters].sort((a,b)=>a.pct-b.pct).filter(x=>x.pct<60).slice(0,3); // claramente fracos
+  const fracosPDI = [...c.clusters].sort((a,b)=>a.pct-b.pct).slice(0,2);       // sempre os 2 menores p/ ação
+
+  // prioridades de desenvolvimento (competências mais baixas)
+  const areas = [{...cultura,k:"s1"},{...eq,k:"s3"},{...com,k:"s4"},{...lid,k:"s5"}];
+  const prioridades = areas.filter(a=>a.pct<70).sort((a,b)=>a.pct-b.pct);
+  const fortes = areas.filter(a=>a.pct>=70).sort((a,b)=>b.pct-a.pct);
+
+  // texto do diagnóstico DISC
+  const discDist = ["D","I","S","C"].map(k=>`${k} ${c.discPct[k]}%`).join(" · ");
+
+  let h = `<div class="block diag">
+    <div class="block__title"><h3>Diagnóstico &amp; Plano de Desenvolvimento</h3><span class="tag">síntese consultiva</span></div>
+    <p class="block__sub">Leitura integrada do perfil de ${esc(primeiro)}, com indicação de aderência e ações práticas de evolução.</p>`;
+
+  // Aderência
+  h += `<div class="verdito" style="border-color:${v.cor}">
+    <div class="verdito__l">
+      <div class="verdito__lbl">Índice de aderência</div>
+      <div class="verdito__num" style="color:${v.cor}">${aderencia}%</div>
+    </div>
+    <div class="verdito__r">
+      <div class="verdito__t" style="color:${v.cor}">${v.t}</div>
+      <div class="verdito__d">${v.d}</div>
+    </div>
+  </div>`;
+
+  // Diagnóstico narrativo
+  h += `<div class="diag__grid">`;
+
+  // Cultura
+  let cultTxt = `O alinhamento à cultura está em <b>${cultura.pct}%</b> (${cultura.band.label.toLowerCase()}). Como as afirmações desta seção foram construídas sobre os próprios valores da My Blue, esse índice reflete o quanto ${esc(primeiro)} pensa e age em sintonia com a empresa.`;
+  if(fortesC.length) cultTxt += ` Destaque positivo em <b>${fortesC.map(x=>x.nome).join("</b> e <b>")}</b>.`;
+  if(fracosNarr.length) cultTxt += ` Os pontos com mais espaço de evolução são <b>${fracosNarr.map(x=>x.nome).join("</b>, <b>")}</b>.`;
+  h += diagCard("Cultura e Valores", cultura, cultTxt);
+
+  // DISC
+  let discTxt = `O perfil predominante é <b>${prim} — ${DISC_NOME[prim]}</b>, com <b>${sec} — ${DISC_NOME[sec]}</b> como traço secundário. Distribuição das escolhas: <b>${discDist}</b>. ${esc(ESTILO[prim].texto)}`;
+  h += diagCard("Perfil DISC", null, discTxt);
+
+  // EQ
+  h += diagCard("Inteligência Emocional", eq, `A inteligência emocional está em <b>${eq.pct}%</b> (${eq.band.label.toLowerCase()}) — capacidade de perceber, regular e usar as emoções a favor das relações e do resultado.`);
+  // Comercial
+  h += diagCard("Competências Comerciais", com, `As competências comerciais estão em <b>${com.pct}%</b> (${com.band.label.toLowerCase()}) — prospecção, negociação, manejo de objeções e relacionamento com a carteira.`);
+  // Liderança
+  h += diagCard("Potencial de Liderança", lid, `O potencial de liderança está em <b>${lid.pct}%</b> (${lid.band.label.toLowerCase()}) — influência, visão de conjunto e disposição para desenvolver pessoas, independente do cargo atual.`);
+
+  h += `</div>`; // fim diag__grid
+
+  // PDI
+  h += `<div class="pdi">
+    <div class="pdi__head">Plano de Desenvolvimento Individual</div>`;
+
+  if(fortes.length){
+    h += `<div class="pdi__sec"><div class="pdi__st">Forças a potencializar</div><ul class="pdi__ul forte">`;
+    fortes.forEach(a=> h += `<li><b>${esc(a.nome)} (${a.pct}%)</b> — alavancar esse ponto forte em desafios e responsabilidades à altura.</li>`);
+    h += `</ul></div>`;
+  }
+
+  h += `<div class="pdi__sec"><div class="pdi__st">Prioridades de desenvolvimento</div>`;
+  if(!prioridades.length){
+    h += `<p class="pdi__none">Todos os eixos estão em nível sólido. Foco em manter consistência e assumir desafios de maior complexidade.</p>`;
+  } else {
+    prioridades.forEach(a=>{
+      let acoes = [];
+      if(a.k==="s1"){ acoes = fracosPDI.map(x=>`Em <b>${esc(x.nome)}</b>: ${x.acao}.`); if(!acoes.length) acoes=["Reforçar a vivência prática dos valores no dia a dia."]; }
+      else acoes = (ACOES[a.k]||[]).slice(0,3).map(t=>esc(t));
+      h += `<div class="pdi__area">
+        <div class="pdi__atop"><span>${esc(a.nome)}</span><span class="pdi__apct" style="color:${a.band.cor}">${a.pct}% · ${a.band.label}</span></div>
+        <ul class="pdi__ul">${acoes.map(t=>`<li>${t}</li>`).join("")}</ul>
+      </div>`;
+    });
+  }
+  h += `</div>`;
+
+  // DISC balance
+  h += `<div class="pdi__sec"><div class="pdi__st">Equilíbrio do estilo (${prim} — ${DISC_NOME[prim]})</div>
+    <ul class="pdi__ul"><li>${esc(DISC_ACAO[prim])}</li></ul></div>`;
+
+  h += `</div>`; // fim pdi
+  h += `</div>`; // fim block
+  return h;
+}
+
+function diagCard(titulo, comp, texto){
+  const tag = comp ? `<span class="diag__pct" style="color:${comp.band.cor}">${comp.pct}%</span>` : "";
+  return `<div class="diag__card">
+    <div class="diag__ct"><span>${esc(titulo)}</span>${tag}</div>
+    <p class="diag__tx">${texto}</p>
+  </div>`;
 }
 
 /* ====================== RENDER ====================== */
@@ -358,9 +549,12 @@ function render(d){
     </div>
   </div>`;
 
+  // Diagnóstico completo + Plano de Desenvolvimento Individual
+  h += diagnosticoHTML(c, nome);
+
   h += `<div class="note">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="9" stroke="#7E8E93" stroke-width="1.5"/><path d="M12 11v5M12 8v.5" stroke="#7E8E93" stroke-width="1.6" stroke-linecap="round"/></svg>
-    <span><b>Como ler.</b> O DISC indica tendências de estilo, não rótulos fixos — toda dimensão tem força e ponto de atenção. Os índices refletem a autopercepção do avaliado e ganham profundidade quando cruzados com a entrevista de devolutiva.</span>
+    <span><b>Como ler.</b> Este diagnóstico parte da autopercepção do avaliado e serve como apoio à decisão — não como veredito. Ele deve ser validado e aprofundado em uma conversa de devolutiva antes de qualquer encaminhamento sobre a pessoa.</span>
   </div>`;
 
   document.getElementById("report").innerHTML = h;
