@@ -237,6 +237,54 @@
   .fa__ic{flex:none;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff;margin-top:1px;}
   .fa.forte .fa__ic{background:var(--s);} .fa.aten .fa__ic{background:var(--accent);}
   .fa__tx{font-size:13.5px;line-height:1.45;color:var(--ink);} .fa__tx small{display:block;color:var(--muted-2);font-size:11.5px;margin-top:2px;font-weight:600;letter-spacing:.02em;}
+
+  /* DISC pontos */
+  .discpts{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0;}
+  @media (max-width:640px){.discpts{grid-template-columns:1fr 1fr;}}
+  .discpts__c{background:var(--surface);border:1px solid var(--line);border-top:3px solid;border-radius:11px;padding:13px 10px;text-align:center;}
+  .discpts__L{font-family:"Fraunces",serif;font-weight:700;font-size:26px;line-height:1;}
+  .discpts__n{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);margin-top:3px;}
+  .discpts__v{font-family:"Fraunces",serif;font-weight:700;font-size:21px;color:var(--ink);margin-top:7px;}
+  .discpts__cl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-top:2px;}
+  .perfilbox{background:linear-gradient(180deg,#FCFAF6,#fff);border:1px solid var(--line);border-left:4px solid var(--petrol);border-radius:11px;padding:14px 16px;font-size:13.5px;line-height:1.55;margin:12px 0;}
+  .perfilbox b{color:var(--petrol-700);}
+  .traits{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0;}
+  @media (max-width:640px){.traits{grid-template-columns:1fr;}}
+  .traits__col{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:13px 16px;}
+  .traits__h{font-size:13px;font-weight:700;margin-bottom:7px;}
+  .traits__col ul{margin:0;padding-left:18px;} .traits__col li{font-size:12.5px;line-height:1.5;margin-bottom:3px;color:var(--ink);}
+  .desafiobox{background:#FBF1E8;border:1px solid #E9C9A8;border-radius:11px;padding:13px 16px;font-size:13px;line-height:1.55;color:#7A4A1E;} .desafiobox b{color:#9A4F12;}
+  /* sub-dimensões */
+  .subgrid{display:grid;gap:8px;margin:12px 0;}
+  .subrow{display:grid;grid-template-columns:1fr 130px 46px;gap:12px;align-items:center;}
+  @media (max-width:560px){.subrow{grid-template-columns:1fr 80px 42px;}}
+  .subrow__n{font-size:13.5px;color:var(--ink);}
+  .subrow__bar{height:8px;border-radius:99px;background:var(--mist);overflow:hidden;}
+  .subrow__bar span{display:block;height:100%;border-radius:99px;}
+  .subrow__p{font-size:13px;font-weight:700;text-align:right;font-variant-numeric:tabular-nums;}
+  .analise{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:13px 16px;font-size:13px;line-height:1.55;color:var(--ink);margin-top:10px;}
+  .analise b{color:var(--petrol-700);}
+  .aderbar{display:flex;justify-content:space-between;align-items:center;background:var(--petrol-900);color:#EAF1F1;border-radius:10px;padding:11px 16px;margin:10px 0;font-size:13.5px;font-weight:600;}
+  .aderbar b{font-size:15px;}
+  .declara{font-size:12.5px;color:var(--muted);background:var(--mist);border-radius:9px;padding:10px 14px;margin-top:9px;} .declara b{color:var(--petrol-700);}
+  /* síntese + parecer */
+  .synth{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:8px 0 12px;}
+  @media (max-width:640px){.synth{grid-template-columns:1fr;}}
+  .synth__col{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:14px 16px;}
+  .synth__t{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;}
+  .synth__ul{margin:0;padding-left:18px;} .synth__ul li{font-size:13px;line-height:1.5;margin-bottom:5px;}
+  .synth__pc{color:var(--muted-2);font-size:11.5px;font-weight:600;}
+  .parecer{background:var(--petrol-900);color:#EAF1F1;border-radius:12px;padding:16px 20px;box-shadow:var(--shadow-lg);}
+  .parecer__t{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--accent);margin-bottom:8px;}
+  .parecer p{margin:0;font-size:13.5px;line-height:1.6;color:#DCE7E7;} .parecer b{color:#fff;}
+  /* PDI tabela */
+  .pditb{width:100%;border-collapse:collapse;font-size:13px;margin:8px 0;}
+  .pditb th{text-align:left;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted-2);padding:9px 10px;border-bottom:2px solid var(--line-strong);}
+  .pditb td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;}
+  .pditb__n{font-weight:700;color:var(--petrol-700);} .pditb__pz{white-space:nowrap;color:var(--muted);font-variant-numeric:tabular-nums;}
+  .pditb__pr{display:inline-block;font-size:11px;font-weight:700;padding:2px 9px;border-radius:99px;}
+  .pditb__pr.alta{background:#F5E0DA;color:#A33A22;} .pditb__pr.media{background:#E8EEF0;color:#2E6E8E;}
+  .proximo{background:linear-gradient(180deg,#FCFAF6,#fff);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:11px;padding:13px 16px;font-size:13px;line-height:1.55;margin-top:10px;} .proximo b{color:var(--petrol-700);}
   .diag__tx b{color:var(--petrol-700);font-weight:600;}
 
   .pdi{background:var(--petrol-900);border-radius:var(--radius);padding:6px 22px 22px;color:#EAF1F1;box-shadow:var(--shadow-lg);}
@@ -388,42 +436,76 @@ function computar(d){
     if(m!=null&&m!=="") mais[map[+m]]++;
     if(n!=null&&n!=="") menos[map[+n]]++;
   });
-  const net = {}; ["D","I","S","C"].forEach(k=> net[k]=mais[k]-menos[k]);
-  const ranked = ["D","I","S","C"].sort((a,b)=> net[b]-net[a] || mais[b]-mais[a]);
+  // DISC oficial (gabarito): +2 por MAIS, -1 por MENOS
+  const pontos = {}; ["D","I","S","C"].forEach(k=> pontos[k]=2*mais[k]-menos[k]);
+  const net = pontos;
+  const ranked = ["D","I","S","C"].sort((a,b)=> pontos[b]-pontos[a] || mais[b]-mais[a]);
+  const discClass = {}; ["D","I","S","C"].forEach(k=> discClass[k]= pontos[k]>=15?"Alto":pontos[k]>=8?"Médio":"Baixo");
 
-  // Competências
+  // Competências (médias gerais)
   const comp = COMPET.map(c=>{
     let sum=0, cnt=0;
     for(let i=1;i<=c.n;i++){ const v=r[`${c.key}_q${i}`]; if(v){ sum+=+v; cnt++; } }
-    const pct = cnt? Math.round(((sum/cnt - 1)/3)*100) : 0; // escala 1-4 → 0-100%
+    const pct = cnt? Math.round(((sum/cnt - 1)/3)*100) : 0;
     return {...c, pct, band:banda(pct)};
   });
   const compBy = {}; comp.forEach(x=> compBy[x.key]=x);
 
-  // Distribuição DISC em % (sobre as escolhas "MAIS")
+  // Distribuição DISC em % (sobre as escolhas MAIS) — só visual
   const totMais = mais.D+mais.I+mais.S+mais.C || 1;
   const discPct = {}; ["D","I","S","C"].forEach(k=> discPct[k]=Math.round((mais[k]/totMais)*100));
 
-  // Clusters de cultura (cada um = 3 afirmações da Seção 1)
-  const clusters = CLUSTERS.map(cl=>{
-    let sum=0,cnt=0;
-    cl.qs.forEach(i=>{ const v=r[`s1_q${i}`]; if(v){ sum+=+v; cnt++; } });
-    const pct = cnt? Math.round(((sum/cnt - 1)/3)*100) : 0;
-    return {nome:cl.nome, acao:cl.acao, pct, band:banda(pct)};
-  });
+  // Sub-dimensões oficiais
+  const clusters  = CLUSTERS.map(cl=>({nome:cl.nome, acao:cl.acao, ...subPct(r,"s1",cl.qs)}));
+  const eqDims    = EQ_DIMS.map(d=>({nome:d.nome, desc:d.desc, ...subPct(r,"s3",d.qs)}));
+  const comStages = COM_STAGES.map(d=>({nome:d.nome, ...subPct(r,"s4",d.qs)}));
+  const lidDims   = LID_DIMS.map(d=>({nome:d.nome, ...subPct(r,"s5",d.qs)}));
 
-  return {mais,menos,net,ranked,comp,compBy,discPct,clusters};
+  return {mais,menos,pontos,net,ranked,discClass,comp,compBy,discPct,clusters,eqDims,comStages,lidDims};
 }
 
-/* Clusters de valores da Seção 1 (3 afirmações cada) + ação de melhoria */
+function subPct(r, prefix, qs){
+  let sum=0,cnt=0; qs.forEach(i=>{ const v=r[`${prefix}_q${i}`]; if(v){ sum+=+v; cnt++; } });
+  const pct = cnt? Math.round(((sum/cnt-1)/3)*100) : 0;
+  return {pct, band:banda(pct), cnt};
+}
+
+/* ===== Mapeamentos oficiais (gabarito My Blue) ===== */
 const CLUSTERS = [
-  {nome:"Simplicidade e Agilidade", qs:[1,2,3], acao:"buscar soluções mais diretas e eliminar etapas que não agregam valor antes de executar"},
-  {nome:"Integridade e Credibilidade", qs:[4,5,6], acao:"reforçar a coerência entre o que promete e entrega, e a transparência ao lidar com problemas"},
-  {nome:"Foco no Cliente", qs:[7,8,9], acao:"conectar as decisões do dia a dia ao impacto na experiência do cliente final"},
-  {nome:"Pessoas e Clima", qs:[10,11,12], acao:"reconhecer e valorizar colegas de forma ativa, contribuindo para um clima saudável"},
-  {nome:"Eficiência de Recursos", qs:[13,14,15], acao:"avaliar alternativas eficientes antes de solicitar recursos e usar o que há com critério"},
-  {nome:"Dono do Resultado", qs:[16,17,18], acao:"assumir responsabilidade ativa pelo resultado, com disciplina mesmo fora da zona de conforto"},
-  {nome:"Inovação e Adaptação", qs:[19,20,21], acao:"questionar o status quo, propor melhorias e encarar mudanças como oportunidade"},
+  {nome:"Simplicidade", qs:[1,2,3], acao:"buscar soluções mais diretas e eliminar complexidade que não agrega valor"},
+  {nome:"Confiança", qs:[4,5,6], acao:"reforçar a coerência entre o que promete e entrega e a transparência ao lidar com problemas"},
+  {nome:"Foco no Cliente", qs:[7,8,9], acao:"conectar cada decisão ao impacto na experiência e no encantamento do cliente"},
+  {nome:"Valorização das Pessoas", qs:[10,11,12], acao:"reconhecer e valorizar colegas de forma ativa, cuidando do clima do time"},
+  {nome:"Austeridade", qs:[13,14,15], acao:"usar recursos com critério e avaliar alternativas eficientes antes de novos investimentos"},
+  {nome:"Foco em Resultado", qs:[16,17,18], acao:"assumir responsabilidade ativa pelo resultado, com disciplina e excelência na entrega"},
+  {nome:"Melhoria Contínua e Inovação", qs:[19,20,21], acao:"questionar o status quo, propor melhorias e encarar mudanças como oportunidade"},
+];
+const EQ_DIMS = [
+  {nome:"Autoconsciência", qs:[1,7], desc:"identificar e nomear as próprias emoções no momento em que ocorrem"},
+  {nome:"Autorregulação", qs:[2,4,6,11], desc:"gerenciar impulsos e manter o equilíbrio emocional sob pressão"},
+  {nome:"Motivação Intrínseca", qs:[5], desc:"manter-se motivado por propósito, mesmo diante de adversidades"},
+  {nome:"Empatia", qs:[3,8], desc:"perceber e considerar as emoções dos outros"},
+  {nome:"Habilidades Sociais", qs:[9,10,12], desc:"construir e manter relacionamentos produtivos"},
+];
+const COM_STAGES = [
+  {nome:"Prospecção e geração de leads", qs:[1,12]},
+  {nome:"Rapport e conexão inicial", qs:[5]},
+  {nome:"Diagnóstico de necessidades", qs:[2]},
+  {nome:"Apresentação de valor", qs:[6,10]},
+  {nome:"Manejo de objeções", qs:[3,8]},
+  {nome:"Fechamento", qs:[11]},
+  {nome:"Gestão da carteira / pós-venda", qs:[7]},
+  {nome:"Disciplina e registro de processos", qs:[4,9]},
+];
+const LID_DIMS = [
+  {nome:"Influência informal", qs:[1]},
+  {nome:"Mobilização de equipes", qs:[2]},
+  {nome:"Visão sistêmica (big picture)", qs:[3]},
+  {nome:"Senso de responsabilidade coletiva", qs:[4]},
+  {nome:"Capacidade de dar feedback", qs:[5]},
+  {nome:"Tomada de decisão sob pressão", qs:[6]},
+  {nome:"Orientação ao desenvolvimento de pessoas", qs:[7]},
+  {nome:"Reconhecimento e valorização do time", qs:[8]},
 ];
 function banda(p){
   if(p>=85) return {label:"Excepcional", cor:"#2F7D5B"};
@@ -522,105 +604,143 @@ const COMP_ATEN  = {s1:"Espaço para aprofundar a vivência prática dos valores
 function bandKey(l){return l==="Excepcional"?"exc":l==="Forte"?"forte":l==="Consistente"?"cons":"dev";}
 
 /* ============ LAUDO (2–3 páginas, determinístico) ============ */
-function diagnosticoHTML(c, nome){
-  const prim = c.ranked[0], sec = c.ranked[1];
-  const primeiro = (nome||"O avaliado").split(" ")[0];
-  const cultura = c.compBy.s1, eq = c.compBy.s3, com = c.compBy.s4, lid = c.compBy.s5;
-  const aderencia = Math.round((cultura.pct*0.6) + (eq.pct*0.4));
-  const v = fitVerdito(aderencia);
-  const discDist = ["D","I","S","C"].map(k=>`${k} ${c.discPct[k]}%`).join(" · ");
+/* ===== Descrições oficiais DISC (gabarito My Blue) ===== */
+const ESSENCIA = {D:"a orientação a resultado e a assertividade", I:"a capacidade relacional e persuasiva", S:"a constância e a habilidade de construir confiança", C:"o rigor analítico e a precisão técnica"};
+const DISC_OFICIAL = {
+  D:{traits:["Orientado a resultado — vai atrás da meta sem estímulo externo","Tomada de decisão rápida — age, ajusta depois","Alta assertividade — comunicação direta e sem rodeios","Competitividade natural — quer ser o melhor","Assume riscos com confiança"],
+     contexto:"é o fechador nato — vai atrás da meta sem precisar de estímulo externo",
+     desafio:"Pode ser percebido como agressivo ou insensível. Tende a atropelar processos e pessoas na busca pelo resultado. Precisa desenvolver escuta ativa e empatia para sustentar relacionamentos de longo prazo com clientes.",
+     pdi:["Comunicação não violenta","Inteligência emocional","Escuta ativa","Paciência estratégica"]},
+  I:{traits:["Comunicação envolvente e persuasiva","Cria conexão rápida com novos clientes (rapport natural)","Entusiasmo contagiante — energiza o ambiente","Habilidade de influenciar sem impor","Otimismo — enxerga oportunidade onde outros veem obstáculo"],
+     contexto:"é o perfil de prospecção e abertura de portas",
+     desafio:"Pode ter dificuldade com disciplina, follow-up e organização. Tende a iniciar bem mas perder o foco no pós-venda e na gestão da carteira. Precisa desenvolver consistência e rigor nos registros e processos.",
+     pdi:["Gestão do tempo","Disciplina comercial","CRM e follow-up","Foco em entrega"]},
+  S:{traits:["Confiável e consistente na entrega","Constrói relacionamentos profundos e duradouros","Paciente e excelente ouvinte","Mantém carteiras com alta fidelização","Ponto de equilíbrio e harmonia do time"],
+     contexto:"é o gestor de carteira e o pós-venda de excelência",
+     desafio:"Pode ter dificuldade com mudanças rápidas, prospecção ativa e situações de conflito. Tende a evitar confrontos mesmo quando necessário. Precisa desenvolver assertividade e tolerância a ambiguidade.",
+     pdi:["Assertividade","Prospecção ativa","Tomada de decisão","Adaptação a mudanças"]},
+  C:{traits:["Analítico, preciso e criterioso","Domina profundamente o produto e o processo","Faz apresentações técnicas de alto nível","Garante a qualidade em cada etapa","Transmite credibilidade e segurança técnica"],
+     contexto:"é o especialista que transmite credibilidade",
+     desafio:"Pode ter dificuldade com agilidade, tomada de decisão sob pressão e comunicação emocional. Tende a analisar demais antes de agir e pode perder negócios por excesso de cautela. Precisa desenvolver velocidade e flexibilidade.",
+     pdi:["Agilidade comercial","Comunicação persuasiva","Tolerância ao risco","Orientação a resultado"]},
+};
+function mcLabel(r,key){ const q=QUAL.find(x=>x.key===key); if(!q||!r) return ""; const v=r[key]; return (v&&q.opts[v])?q.opts[v]:""; }
+function subRows(dims){
+  return dims.map(d=>`<div class="subrow"><span class="subrow__n">${esc(d.nome)}</span><span class="subrow__bar"><span style="width:${d.pct}%;background:${d.band.cor}"></span></span><span class="subrow__p" style="color:${d.band.cor}">${d.pct}%</span></div>`).join("");
+}
+function tbExtremos(dims){ const s=[...dims].sort((a,b)=>b.pct-a.pct); return {top:s.slice(0,2), low:s[s.length-1], low2:s.slice(-2).reverse()}; }
+function acaoFraqueza(f){
+  const n=f.nome.toLowerCase();
+  if(f.area==="IE") return `Praticar e desenvolver ${n} com apoio de treinamento em inteligência emocional`;
+  if(f.area==="Comercial") return `Estruturar rotina e treinamento focados em ${n}`;
+  if(f.area==="Liderança") return `Exercitar ${n} assumindo pequenas frentes de responsabilidade`;
+  return `Aproximar-se do valor "${f.nome}" na prática do dia a dia`;
+}
 
-  const clOrd = [...c.clusters].sort((a,b)=>b.pct-a.pct);
-  const fortesC = clOrd.filter(x=>x.pct>=70).slice(0,3);
-  const fracosNarr = [...c.clusters].sort((a,b)=>a.pct-b.pct).filter(x=>x.pct<60).slice(0,3);
-  const fracosPDI = [...c.clusters].sort((a,b)=>a.pct-b.pct).slice(0,2);
+/* ===== LAUDO (7 seções — modelo My Blue / WS) ===== */
+function diagnosticoHTML(c, nome, r){
+  const prim=c.ranked[0], sec=c.ranked[1];
+  const primeiro=(nome||"O avaliado").split(" ")[0];
+  const cultura=c.compBy.s1, eq=c.compBy.s3, com=c.compBy.s4, lid=c.compBy.s5;
+  const aderCult = cultura.pct;
+  const aderencia = Math.round((cultura.pct*0.6)+(eq.pct*0.4));
+  const v=fitVerdito(aderencia);
 
-  const areas = [{...cultura,k:"s1"},{...eq,k:"s3"},{...com,k:"s4"},{...lid,k:"s5"}];
-  const prioridades = areas.filter(a=>a.pct<70).sort((a,b)=>a.pct-b.pct);
-  const fortes = areas.filter(a=>a.pct>=70).sort((a,b)=>b.pct-a.pct);
-
-  // montar pontos fortes / atenção
-  const pFortes = [];
-  DISC_DETAL[prim].fortes.slice(0,3).forEach(t=>pFortes.push({t, s:`Perfil ${prim} — ${DISC_NOME[prim]}`}));
-  fortes.forEach(a=>pFortes.push({t:COMP_FORTE[a.k], s:`${a.nome} · ${a.pct}%`}));
-  fortesC.forEach(x=>pFortes.push({t:`Forte vivência do valor "${x.nome}"`, s:`Cultura · ${x.pct}%`}));
-
-  const pAten = [];
-  DISC_DETAL[prim].atencao.slice(0,3).forEach(t=>pAten.push({t, s:`Ponto cego do perfil ${prim}`}));
-  areas.filter(a=>a.pct<55).sort((a,b)=>a.pct-b.pct).forEach(a=>pAten.push({t:COMP_ATEN[a.k], s:`${a.nome} · ${a.pct}%`}));
-  fracosNarr.forEach(x=>pAten.push({t:`Vivência ainda discreta do valor "${x.nome}"`, s:`Cultura · ${x.pct}%`}));
+  // médias dos blocos de sub-dimensão (para os totais)
+  const lidTotal = Math.round(c.lidDims.reduce((a,d)=>a+d.pct,0)/c.lidDims.length);
 
   let h = `<div class="block laudo">
-    <div class="block__title"><h3>Laudo Comportamental</h3><span class="tag">parecer consultivo</span></div>
-    <p class="block__sub">Análise integrada do perfil de ${esc(primeiro)} — base para devolutiva e desenvolvimento.</p>`;
+    <div class="block__title"><h3>Laudo de Avaliação Comportamental</h3><span class="tag">DISC · IE · Fit Cultural · Comercial · Liderança</span></div>
+    <p class="block__sub">Análise integrada do perfil de ${esc(nome)} — base para devolutiva e desenvolvimento.</p>`;
 
-  // 1. Perfil comportamental detalhado
-  h += `<div class="laudo__sec"><h4 class="laudo__h">Perfil comportamental</h4>
-    <p class="laudo__p">${esc(DISC_DETAL[prim].desc)}</p>
-    <p class="laudo__p">O traço predominante é <b>${prim} — ${DISC_NOME[prim]}</b>, tendo <b>${sec} — ${DISC_NOME[sec]}</b> como estilo secundário, que ${SEC_INFLU[sec]}. A distribuição das escolhas no instrumento foi <b>${discDist}</b>, indicando o peso relativo de cada dimensão no comportamento natural.</p>
-    <p class="laudo__p"><b>Como tende a agir:</b> ${esc(DISC_DETAL[prim].ctx)}</p></div>`;
+  /* 1. PERFIL DISC */
+  h += `<div class="laudo__sec"><h4 class="laudo__h">1. Perfil Comportamental DISC</h4>
+    <p class="laudo__p">A análise DISC combina a Parte A (escolha forçada de palavras) e a Parte B (cenários comportamentais), totalizando 18 grupos. A pontuação segue o padrão oficial: <b>+2</b> para cada escolha MAIS e <b>−1</b> para cada MENOS.</p>
+    <div class="discpts">`;
+  ["D","I","S","C"].forEach(k=>{ h += `<div class="discpts__c" style="border-color:${DIM[k].cor}"><div class="discpts__L" style="color:${DIM[k].cor}">${k}</div><div class="discpts__n">${DIM[k].nome}</div><div class="discpts__v">${c.pontos[k]} pts</div><div class="discpts__cl" style="color:${DIM[k].cor}">${c.discClass[k]}</div></div>`; });
+  h += `</div>
+    <div class="perfilbox"><b>PERFIL IDENTIFICADO: ${prim}${sec} — ${DISC_NOME[prim]} com ${DISC_NOME[sec]} secundária.</b> ${esc(primeiro)} apresenta ${prim} como fator primário (${c.pontos[prim]} pts) e ${sec} como secundário (${c.pontos[sec]} pts). O perfil ${prim}${sec} combina ${ESSENCIA[prim]} do ${prim} com ${ESSENCIA[sec]} do ${sec}. No contexto da My Blue, o perfil ${prim} ${DISC_OFICIAL[prim].contexto}.</div>
+    <div class="traits"><div class="traits__col"><div class="traits__h" style="color:${DIM[prim].cor}">${prim} — ${DISC_NOME[prim]} (primário)</div><ul>${DISC_OFICIAL[prim].traits.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div>
+      <div class="traits__col"><div class="traits__h" style="color:${DIM[sec].cor}">${sec} — ${DISC_NOME[sec]} (secundário)</div><ul>${DISC_OFICIAL[sec].traits.map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div></div>
+    <div class="desafiobox"><b>⚠ Desafios do perfil ${prim}:</b> ${esc(DISC_OFICIAL[prim].desafio)}</div></div>`;
 
-  // 2. Pontos fortes
-  h += `<div class="laudo__sec"><h4 class="laudo__h">Pontos fortes</h4><div class="fa forte">`;
-  pFortes.forEach(p=> h += `<div class="fa__item"><span class="fa__ic">+</span><div class="fa__tx">${esc(p.t)}<small>${esc(p.s)}</small></div></div>`);
-  h += `</div></div>`;
+  /* 2. INTELIGÊNCIA EMOCIONAL */
+  const eqE = tbExtremos(c.eqDims);
+  h += `<div class="laudo__sec"><h4 class="laudo__h">2. Inteligência Emocional</h4>
+    <p class="laudo__p">Avaliada nas 5 dimensões do modelo de Daniel Goleman, a partir de 12 afirmações e 1 questão de múltipla escolha.</p>
+    <div class="subgrid">${subRows(c.eqDims)}</div>
+    <div class="analise"><b>Análise — Inteligência Emocional.</b> Índice geral de <b>${eq.pct}%</b> (${eq.band.label.toLowerCase()}). Destaque em <b>${eqE.top.map(d=>d.nome).join("</b> e <b>")}</b>. O ponto de maior atenção é <b>${esc(eqE.low.nome)}</b> (${eqE.low.pct}%) — ${esc(eqE.low.pct<55?"principal lacuna emocional a trabalhar, sobretudo em situações de pressão e rejeição":"frente de aprimoramento para ganhar consistência sob pressão")}.</div></div>`;
 
-  // 3. Pontos de atenção
-  h += `<div class="laudo__sec"><h4 class="laudo__h">Pontos de atenção</h4><div class="fa aten">`;
-  pAten.forEach(p=> h += `<div class="fa__item"><span class="fa__ic">!</span><div class="fa__tx">${esc(p.t)}<small>${esc(p.s)}</small></div></div>`);
-  h += `</div></div>`;
+  /* 3. FIT CULTURAL */
+  const clE = tbExtremos(c.clusters);
+  h += `<div class="laudo__sec"><h4 class="laudo__h">3. Fit Cultural — Aderência aos Valores My Blue</h4>
+    <p class="laudo__p">Avaliado por 21 afirmações distribuídas entre os 7 valores da My Blue (3 por valor).</p>
+    <div class="subgrid">${subRows(c.clusters)}</div>
+    <div class="aderbar"><span>Aderência cultural geral</span><b style="color:${cultura.band.cor}">${aderCult}% · ${cultura.band.label}</b></div>
+    <div class="analise"><b>Análise — Fit Cultural.</b> ${esc(primeiro)} demonstra <b>${aderCult}%</b> de alinhamento aos valores. Pontos mais fortes: <b>${clE.top.map(d=>d.nome).join("</b> e <b>")}</b>. Valor com menor expressão: <b>${esc(clE.low.nome)}</b> (${clE.low.pct}%) — ${esc(clE.low.pct<60?"ponto de atenção para aproximação cultural, sobretudo em vista de progressão a funções de gestão":"sem caráter crítico, mas observável")}.</div></div>`;
 
-  // 4. Análise por competência
-  h += `<div class="laudo__sec"><h4 class="laudo__h">Análise por competência</h4><div class="diag__grid">`;
-  let cultTxt = `${COMP_TXT.s1[bandKey(cultura.band.label)]} Como as afirmações foram construídas sobre os próprios valores da My Blue, o índice de <b>${cultura.pct}%</b> reflete o quanto ${esc(primeiro)} pensa e age em sintonia com a empresa.`;
-  if(fortesC.length) cultTxt += ` Destaque em <b>${fortesC.map(x=>x.nome).join("</b>, <b>")}</b>.`;
-  if(fracosNarr.length) cultTxt += ` Mais espaço de evolução em <b>${fracosNarr.map(x=>x.nome).join("</b>, <b>")}</b>.`;
-  h += diagCard("Cultura e Valores", cultura, cultTxt);
-  h += diagCard("Inteligência Emocional", eq, `${COMP_TXT.s3[bandKey(eq.band.label)]} (índice de <b>${eq.pct}%</b>)`);
-  h += diagCard("Competências Comerciais", com, `${COMP_TXT.s4[bandKey(com.band.label)]} (índice de <b>${com.pct}%</b>)`);
-  h += diagCard("Potencial de Liderança", lid, `${COMP_TXT.s5[bandKey(lid.band.label)]} (índice de <b>${lid.pct}%</b>)`);
-  h += `</div></div>`;
+  /* 4. PERFIL COMERCIAL */
+  const coE = tbExtremos(c.comStages);
+  const fav1 = mcLabel(r,"s4_mc1"), fav2 = mcLabel(r,"s4_mc2");
+  h += `<div class="laudo__sec"><h4 class="laudo__h">4. Perfil Comercial</h4>
+    <p class="laudo__p">Avaliado por 12 afirmações e 2 questões de múltipla escolha, cobrindo as etapas do ciclo de vendas da My Blue.</p>
+    <div class="subgrid">${subRows(c.comStages)}</div>
+    <div class="analise"><b>Análise — Perfil Comercial.</b> Índice geral de <b>${com.pct}%</b> (${com.band.label.toLowerCase()}). Etapas mais fortes: <b>${coE.top.map(d=>d.nome).join("</b> e <b>")}</b>. As lacunas mais críticas estão em <b>${esc(coE.low.nome)}</b> (${coE.low.pct}%)${coE.low2[1]?` e <b>${esc(coE.low2[1].nome)}</b> (${coE.low2[1].pct}%)`:""} — atenção ao risco de perder receita recorrente por falta de acompanhamento sistemático da base.</div>
+    ${fav1?`<div class="declara"><b>Ponto forte declarado pelo avaliado:</b> ${esc(fav1)}${fav2?` · <b>Ao não bater meta:</b> ${esc(fav2)}`:""}</div>`:""}</div>`;
 
-  // 5. Adequação à cultura e ao cargo
-  h += `<div class="laudo__sec"><h4 class="laudo__h">Adequação à cultura e ao cargo</h4>
-    <p class="laudo__p">No eixo cultural, a aderência geral é <b>${cultura.pct}% (${cultura.band.label.toLowerCase()})</b>${fracosPDI.length?`, com os valores <b>${fracosPDI.map(x=>x.nome).join("</b> e <b>")}</b> como frentes prioritárias de aproximação`:""}.</p>
-    <p class="laudo__p">Considerando o contexto comercial e de relacionamento da função, o perfil <b>${prim} — ${DISC_NOME[prim]}</b> ${ROLEFIT[prim]}. As competências comerciais (<b>${com.pct}%</b>, ${com.band.label.toLowerCase()}) ${com.pct>=70?"sustentam bem":"ainda pedem reforço para"} a atuação na função, e a inteligência emocional (<b>${eq.pct}%</b>) ${eq.pct>=70?"favorece":"é fator a desenvolver na"} gestão da relação com o cliente.</p></div>`;
+  /* 5. POTENCIAL DE LIDERANÇA */
+  const liE = tbExtremos(c.lidDims);
+  const desLid = mcLabel(r,"s5_mc1");
+  const classLid = lidTotal>=70?"ALTO POTENCIAL":lidTotal>=55?"POTENCIAL EM DESENVOLVIMENTO":"POTENCIAL INICIAL";
+  h += `<div class="laudo__sec"><h4 class="laudo__h">5. Potencial de Liderança</h4>
+    <p class="laudo__p">Avaliado por 8 afirmações e 1 questão de múltipla escolha — influência, visão sistêmica, desenvolvimento de pessoas e decisão.</p>
+    <div class="subgrid">${subRows(c.lidDims)}</div>
+    <div class="aderbar"><span>Potencial de liderança</span><b style="color:${banda(lidTotal).cor}">${lidTotal}% · ${classLid}</b></div>
+    <div class="analise"><b>Análise — Liderança.</b> Destaque em <b>${liE.top.map(d=>d.nome).join("</b> e <b>")}</b>. As dimensões de liderança de desenvolvimento — sobretudo <b>${esc(liE.low.nome)}</b> (${liE.low.pct}%) — apresentam lacunas a trabalhar antes de uma eventual promoção a cargo de gestão.${desLid?` O maior desafio declarado foi: <b>"${esc(desLid)}"</b>.`:""}</div></div>`;
 
-  // 6. Parecer / aderência
-  h += `<div class="laudo__sec gestor-only"><h4 class="laudo__h">Parecer e índice de aderência</h4>
-    <div class="verdito" style="border-color:${v.cor}">
-      <div class="verdito__l"><div class="verdito__lbl">Índice de aderência</div><div class="verdito__num" style="color:${v.cor}">${aderencia}%</div></div>
-      <div class="verdito__r"><div class="verdito__t" style="color:${v.cor}">${v.t}</div><div class="verdito__d">${v.d}</div></div>
-    </div></div>`;
+  /* 6. SÍNTESE E PARECER */
+  const fortClusters=[...c.clusters].sort((a,b)=>b.pct-a.pct).slice(0,2);
+  const fortsCons=[];
+  fortsCons.push(`Perfil comercial de ${com.pct>=70?"alta performance":"base sólida"} — combinação ${prim}${sec} valiosa para a função`);
+  DISC_OFICIAL[prim].traits.slice(0,1).forEach(t=>fortsCons.push(t));
+  c.eqDims.filter(d=>d.pct>=80).slice(0,1).forEach(d=>fortsCons.push(`${d.nome} desenvolvida (IE)`));
+  fortClusters.forEach(x=>fortsCons.push(`Forte alinhamento ao valor "${x.nome}" (${x.pct}%)`));
+  c.lidDims.filter(d=>d.pct>=80).slice(0,1).forEach(d=>fortsCons.push(`${d.nome} — ativo de liderança`));
 
-  // 7. PDI
-  h += `<div class="laudo__sec"><h4 class="laudo__h">Plano de Desenvolvimento Individual</h4><div class="pdi">`;
-  if(fortes.length){
-    h += `<div class="pdi__sec"><div class="pdi__st">Forças a potencializar</div><ul class="pdi__ul forte">`;
-    fortes.forEach(a=> h += `<li><b>${esc(a.nome)} (${a.pct}%)</b> — ${esc(FORCA_ACAO[a.k]||"alavancar esse ponto forte em desafios à altura.")}</li>`);
-    h += `</ul></div>`;
-  }
-  h += `<div class="pdi__sec"><div class="pdi__st">Prioridades de desenvolvimento</div>`;
-  if(!prioridades.length){
-    h += `<p class="pdi__none">Todos os eixos estão em nível sólido. Foco em manter consistência e assumir desafios de maior complexidade.</p>`;
-  } else {
-    prioridades.forEach(a=>{
-      let acoes = [];
-      if(a.k==="s1"){ acoes = fracosPDI.map(x=>`Em <b>${esc(x.nome)}</b>: ${x.acao}.`); if(!acoes.length) acoes=["Reforçar a vivência prática dos valores no dia a dia."]; }
-      else acoes = (ACOES[a.k]||[]).map(t=>esc(t));
-      h += `<div class="pdi__area"><div class="pdi__atop"><span>${esc(a.nome)}</span><span class="pdi__apct" style="color:${a.band.cor}">${a.pct}% · ${a.band.label}</span></div><ul class="pdi__ul">${acoes.map(t=>`<li>${t}</li>`).join("")}</ul></div>`;
-    });
-  }
+  const fraquezas=[]
+    .concat(c.eqDims.map(d=>({nome:d.nome,pct:d.pct,area:"IE"})))
+    .concat(c.comStages.map(d=>({nome:d.nome,pct:d.pct,area:"Comercial"})))
+    .concat(c.lidDims.map(d=>({nome:d.nome,pct:d.pct,area:"Liderança"})))
+    .concat(c.clusters.map(d=>({nome:d.nome,pct:d.pct,area:"Cultura"})));
+  const piores = fraquezas.sort((a,b)=>a.pct-b.pct).slice(0,5);
+
+  // projeção de carreira
+  let proj;
+  if(aderencia>=75 && com.pct>=75 && lidTotal>=70) proj="tem perfil para assumir uma função de coordenação comercial em 12 a 18 meses, desde que enderece as lacunas abaixo";
+  else if(aderencia>=60 && com.pct>=60) proj="tem potencial de progressão para maior responsabilidade em 18 a 24 meses, com desenvolvimento consistente das lacunas prioritárias";
+  else proj="deve consolidar primeiro as competências da função atual antes de pleitear novas responsabilidades, com acompanhamento próximo do plano de desenvolvimento";
+
+  h += `<div class="laudo__sec"><h4 class="laudo__h">6. Síntese e Parecer Técnico</h4>
+    <div class="synth"><div class="synth__col"><div class="synth__t" style="color:var(--s)">Pontos fortes consolidados</div><ul class="synth__ul forte">${fortsCons.slice(0,5).map(t=>`<li>${esc(t)}</li>`).join("")}</ul></div>
+      <div class="synth__col"><div class="synth__t" style="color:var(--accent)">Lacunas prioritárias</div><ul class="synth__ul aten">${piores.map(f=>`<li>${esc(f.nome)} <span class="synth__pc">(${f.pct}% · ${f.area})</span></li>`).join("")}</ul></div></div>
+    <div class="parecer gestor-only"><div class="parecer__t">Parecer Técnico do Avaliador</div><p>${esc(primeiro)} apresenta perfil <b>${prim}${sec}</b> com aderência cultural de <b>${aderCult}%</b> e competências comerciais em <b>${com.pct}%</b>. ${esc(v.t)} — ${esc(v.d.toLowerCase())} O profissional ${proj}. O risco mais imediato está em sustentar o resultado: as lacunas em <b>${esc(piores[0].nome.toLowerCase())}</b> e <b>${esc(piores[1].nome.toLowerCase())}</b> devem ser endereçadas com prioridade no PDI.</p></div></div>`;
+
+  /* 7. PDI (tabela) */
+  const pdiRows=[];
+  piores.slice(0,2).forEach(f=> pdiRows.push({a:acaoFraqueza(f), p:"0–30 dias", pr:"Alta"}));
+  pdiRows.push({a:`Trilha de desenvolvimento do perfil ${prim}: ${DISC_OFICIAL[prim].pdi.slice(0,3).join(", ")}`, p:"0–30 dias", pr:"Alta"});
+  piores.slice(2,4).forEach(f=> pdiRows.push({a:acaoFraqueza(f), p:"30–60 dias", pr:"Média"}));
+  pdiRows.push({a:"Mentoria quinzenal com a liderança — foco em visão sistêmica e desenvolvimento de pessoas", p:"30–90 dias", pr:"Média"});
+  pdiRows.push({a:"Avaliação de progresso ao final de 90 dias — comparativo com este laudo", p:"90 dias", pr:"Alta"});
+
+  h += `<div class="laudo__sec"><h4 class="laudo__h">7. Plano de Desenvolvimento Individual (PDI)</h4>
+    <p class="laudo__p">Estruturado a partir da análise integrada das 5 dimensões, priorizando as lacunas de maior impacto no resultado e na progressão de carreira.</p>
+    <table class="pditb"><thead><tr><th>#</th><th>Ação de Desenvolvimento</th><th>Prazo</th><th>Prior.</th></tr></thead><tbody>
+    ${pdiRows.map((row,i)=>`<tr><td class="pditb__n">${i+1}</td><td>${esc(row.a)}</td><td class="pditb__pz">${row.p}</td><td><span class="pditb__pr ${row.pr==="Alta"?"alta":"media"}">${row.pr}</span></td></tr>`).join("")}
+    </tbody></table>
+    <div class="proximo gestor-only"><b>Próximo passo.</b> Agendar a sessão de devolutiva individual com ${esc(primeiro)} para apresentar este laudo, alinhar o PDI e formalizar os compromissos. Os índices refletem a autopercepção do avaliado e devem ser confrontados com a percepção da liderança e indicadores reais. Prazo sugerido: até 5 dias úteis.</div></div>`;
+
   h += `</div>`;
-  h += `<div class="pdi__sec"><div class="pdi__st">Equilíbrio do estilo (${prim} — ${DISC_NOME[prim]})</div><ul class="pdi__ul"><li>${esc(DISC_ACAO[prim])}</li></ul></div>`;
-  h += `</div></div>`;
-
-  // 8. Recomendações para a devolutiva
-  h += `<div class="laudo__sec gestor-only"><h4 class="laudo__h">Recomendações para a devolutiva</h4>
-    <p class="laudo__p">Sugere-se conduzir uma conversa de devolutiva começando pelo reconhecimento dos pontos fortes, validando-os com exemplos concretos do dia a dia. Em seguida, apresentar os pontos de atenção como oportunidades de evolução — não como falhas — pactuando 2 a 3 ações prioritárias do plano acima com prazos definidos.</p>
-    <p class="laudo__p">Os índices refletem a autopercepção do avaliado; recomenda-se confrontá-los com a percepção da liderança e com indicadores reais de desempenho para calibrar o plano. Um novo ciclo de avaliação em 6 meses permite medir a evolução de forma objetiva.</p></div>`;
-
-  h += `</div>`; // fim block
   return h;
 }
 
@@ -716,7 +836,7 @@ function renderIndividual(d){
   </div>`;
 
   // Diagnóstico completo + Plano de Desenvolvimento Individual
-  h += diagnosticoHTML(c, nome);
+  h += diagnosticoHTML(c, nome, d.respostas||{});
 
   h += `<div class="note">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex:none"><circle cx="12" cy="12" r="9" stroke="#7E8E93" stroke-width="1.5"/><path d="M12 11v5M12 8v.5" stroke="#7E8E93" stroke-width="1.6" stroke-linecap="round"/></svg>
